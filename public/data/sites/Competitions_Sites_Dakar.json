@@ -1,0 +1,5 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-17.446550053501486,14.679673340283026]},"properties":{"id":null,"Nom":"Stade Iba Mar Diop","Name":"Iba Mar Diop Stadium"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-17.462050021930967,14.69577645070753]},"properties":{"id":null,"Nom":"Complexe Tour de l'?uf","Name":"Egg Tower Complex"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-17.469168121184367,14.681690040574978]},"properties":{"id":null,"Nom":"Corniche Ouest","Name":"West Corniche"}}
+]}

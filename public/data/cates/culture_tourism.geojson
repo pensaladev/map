@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.494913887926522,
+          14.72227878598736
+        ]
+      },
+      "properties": {
+        "id": 5,
+        "Name": "Renaissance Monument"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.39842041397894,
+          14.666853340596752
+        ]
+      },
+      "properties": {
+        "id": 6,
+        "Name": "Goree Island"
+      }
+    }
+  ]
+}

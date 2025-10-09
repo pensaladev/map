@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.270512048807866,
+          14.713187724957098
+        ]
+      },
+      "properties": {
+        "id": 12,
+        "Name": "Dakar Police Station"
+      }
+    }
+  ]
+}

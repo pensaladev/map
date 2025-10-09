@@ -1,0 +1,6 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-17.21246193844027,14.733866120046287]},"properties":{"id":null,"Nom":"Dakar Arena","Name":"Dakar Arena"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-17.201043233361396,14.732351255976145]},"properties":{"id":null,"Nom":"Stade Me Abdoulaye Wade","Name":"Me Abdoulaye Wade Stadium"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-17.193856296649518,14.715983819551752]},"properties":{"id":null,"Nom":"Centre équestre de la Gendarmerie de Diamniadio","Name":"Diamniadio Gendarmerie Equestrian Center"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-17.198432555832948,14.73963759013712]},"properties":{"id":null,"Nom":"Centre des expositions de Diamniadio","Name":"Diamniadio Exhibition Center"}}
+]}

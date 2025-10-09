@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.473301466269152,
+          14.69577136990134
+        ]
+      },
+      "properties": {
+        "id": 3,
+        "Name": "L'Avenue Restaurant"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.427996994577743,
+          14.670455118639785
+        ]
+      },
+      "properties": {
+        "id": 4,
+        "Name": "La Fourchette"
+      }
+    }
+  ]
+}

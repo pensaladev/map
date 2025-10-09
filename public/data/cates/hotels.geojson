@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.47363997951406,
+          14.695089164497752
+        ]
+      },
+      "properties": {
+        "id": 1,
+        "Name": "Raddisson Blu Hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.035288758631534,
+          14.449017677532652
+        ]
+      },
+      "properties": {
+        "id": 2,
+        "Name": "Lamantin Beach Resort"
+      }
+    }
+  ]
+}

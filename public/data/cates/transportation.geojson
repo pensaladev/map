@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.19886544918383,
+          14.716757607012227
+        ]
+      },
+      "properties": {
+        "id": 9,
+        "Name": "TER - Gare de Diamniadio"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.46178178307385,
+          14.709556201238234
+        ]
+      },
+      "properties": {
+        "id": 10,
+        "Name": "BRT Liberté 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.06716277384291,
+          14.67227032956031
+        ]
+      },
+      "properties": {
+        "id": 11,
+        "Name": "Blaise Diagne Airport (AIBD)"
+      }
+    }
+  ]
+}

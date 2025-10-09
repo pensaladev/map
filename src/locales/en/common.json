@@ -1,0 +1,26 @@
+{
+  "title": "DAKAR JO 2026 MAP",
+  "hello": "Hello, {{name}}!",
+
+  "search.title": "Search Places",
+  "search.tab.global": "Search Anywhere",
+  "search.tab.local": "Configured Locations",
+
+  "search.placeholder.global": "Search any place in the world…",
+  "search.tip.global": "Tip: search cities, landmarks, addresses… then we’ll fly the map there.",
+  "local.search.placeholder": "Search by name, zone, or category…",
+  "local.loading": "Loading…",
+  "local.error.loadPlaces": "Failed to load places.",
+  "local.noMatches": "No matches.",
+  "local.untitled": "Untitled",
+  "local.zone.unassigned": "Unassigned",
+
+  "basemap.modal.title": "Map Layers",
+  "basemap.option.mapbox_streets.label": "Mapbox Streets",
+  "basemap.option.mapbox_streets.desc": "Default street map with labels.",
+  "basemap.option.osm.label": "OpenStreetMap",
+  "basemap.option.osm.desc": "Community raster tiles (OSM).",
+  "basemap.option.mapbox_satellite.label": "Satellite (Mapbox)",
+  "basemap.option.mapbox_satellite.desc": "Imagery with streets overlay.",
+  "basemap.tip": "Tip: You can change layers anytime. Your custom data layers will reload automatically."
+}

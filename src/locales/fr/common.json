@@ -1,0 +1,26 @@
+{
+  "title": "DAKAR JO 2026 CARTE",
+  "hello": "Hello, {{name}}!",
+
+  "search.title": "Rechercher des lieux",
+  "search.tab.global": "Rechercher partout",
+  "search.tab.local": "Lieux configurés",
+
+  "search.placeholder.global": "Recherchez n’importe quel lieu dans le monde…",
+  "search.tip.global": "Astuce : recherchez des villes, des lieux emblématiques, des adresses… puis nous déplacerons la carte à cet endroit.",
+  "local.search.placeholder": "Recherchez par nom, zone ou catégorie…",
+  "local.loading": "Chargement…",
+  "local.error.loadPlaces": "Impossible de charger les lieux.",
+  "local.noMatches": "Aucun résultat.",
+  "local.untitled": "Sans titre",
+  "local.zone.unassigned": "Non attribué",
+
+  "basemap.modal.title": "Couches de carte",
+  "basemap.option.mapbox_streets.label": "Mapbox Streets",
+  "basemap.option.mapbox_streets.desc": "Carte routière par défaut avec libellés.",
+  "basemap.option.osm.label": "OpenStreetMap",
+  "basemap.option.osm.desc": "Tuiles raster communautaires (OSM).",
+  "basemap.option.mapbox_satellite.label": "Satellite (Mapbox)",
+  "basemap.option.mapbox_satellite.desc": "Imagerie satellite avec superposition des rues.",
+  "basemap.tip": "Astuce : vous pouvez changer de couche à tout moment. Vos couches de données personnalisées se rechargeront automatiquement."
+}

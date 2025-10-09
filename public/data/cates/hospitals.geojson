@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -17.43517705031898,
+          14.66232049990162
+        ]
+      },
+      "properties": {
+        "id": 7,
+        "Name": "Dakar Principal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -16.971691237704384,
+          14.434210188192429
+        ]
+      },
+      "properties": {
+        "id": 8,
+        "Name": "Saly Coastal Clinic"
+      }
+    }
+  ]
+}
