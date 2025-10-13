@@ -94,8 +94,11 @@ export function BasemapSwitcherModal({
 
   // Helper: translate with a guaranteed fallback
   const tr = (key: string, fallback: string) => {
-    const out = t(key, { defaultValue: fallback });
-    return out === key ? fallback : out;
+    const fallbackTranslated = t(fallback);
+    const safeFallback =
+      fallbackTranslated === fallback ? fallback : fallbackTranslated;
+    const out = t(key, { defaultValue: safeFallback });
+    return out === key ? safeFallback : out;
   };
 
   const apply = async (id: BasemapId) => {

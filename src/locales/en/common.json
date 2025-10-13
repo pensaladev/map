@@ -17,10 +17,20 @@
 
   "basemap.modal.title": "Map Layers",
   "basemap.option.mapbox_streets.label": "Mapbox Streets",
-  "basemap.option.mapbox_streets.desc": "Default street map with labels.",
+  "basemap.option.mapbox_streets.desc": "Default road map with labels.",
+  "basemap.option.mapbox_outdoors.label": "Outdoors (Mapbox)",
+  "basemap.option.mapbox_outdoors.desc": "Terrain-focused map with trails and contours.",
+  "basemap.option.mapbox_light.label": "Light (Mapbox)",
+  "basemap.option.mapbox_light.desc": "Clean, light basemap for data overlays.",
+  "basemap.option.mapbox_dark.label": "Dark (Mapbox)",
+  "basemap.option.mapbox_dark.desc": "Dark basemap that makes markers pop.",
   "basemap.option.osm.label": "OpenStreetMap",
   "basemap.option.osm.desc": "Community raster tiles (OSM).",
   "basemap.option.mapbox_satellite.label": "Satellite (Mapbox)",
-  "basemap.option.mapbox_satellite.desc": "Imagery with streets overlay.",
+  "basemap.option.mapbox_satellite.desc": "Satellite imagery with road overlay.",
+  "basemap.option.mapbox_nav_day.label": "Navigation Day (Mapbox)",
+  "basemap.option.mapbox_nav_day.desc": "High-contrast day style optimized for driving.",
+  "basemap.option.mapbox_nav_night.label": "Navigation Night (Mapbox)",
+  "basemap.option.mapbox_nav_night.desc": "Night style designed for in-car use.",
   "basemap.tip": "Tip: You can change layers anytime. Your custom data layers will reload automatically."
 }
