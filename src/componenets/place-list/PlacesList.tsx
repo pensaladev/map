@@ -18,6 +18,8 @@ import {
 import mapboxgl from "mapbox-gl";
 import { CATEGORIES } from "./place-list-utils";
 import { Modal } from "../common/Modal";
+import { useTranslation } from "react-i18next";
+import { withTranslatedCategoryLabels } from "./categoryTranslations";
 
 type VenueFeature = Feature<Point, GeoJsonProperties>;
 const DEFAULT_VISIBLE_CATS = new Set<string>(["competition"]);
@@ -74,6 +76,7 @@ function useIsMobile() {
 }
 
 export function PlacesList() {
+  const { t, i18n } = useTranslation();
   const isMobile = useIsMobile();
   const mapManager = MapManager.getInstance();
   const [panelOpen, setPanelOpen] = useState(false);
@@ -87,9 +90,17 @@ export function PlacesList() {
     ),
   );
 
+  const translatedCategories = useMemo(
+    () => withTranslatedCategoryLabels(CATEGORIES, t),
+    [t, i18n.language],
+  );
+
   const activeCategory = useMemo(
-    () => CATEGORIES.find((c) => c.id === openCatId) ?? CATEGORIES[0],
-    [openCatId],
+    () =>
+      translatedCategories.find((c) => c.id === openCatId) ??
+      translatedCategories[0] ??
+      CATEGORIES[0],
+    [openCatId, translatedCategories],
   );
 
   const [venues, setVenues] = useState<LoadedVenue[]>([]);
@@ -448,7 +459,7 @@ export function PlacesList() {
           >
             <div className="text-sm h-full overflow-y-auto">
               <PlacesCategoryList
-                CATEGORIES={CATEGORIES}
+                CATEGORIES={translatedCategories}
                 openCatId={openCatId}
                 activeCategory={activeCategory}
                 setOpenCatId={setOpenCatId}
@@ -482,7 +493,7 @@ export function PlacesList() {
                        w-[90vw] sm:w-72 max-h-[50dvh] overflow-y-auto"
               >
                 <PlacesCategoryList
-                  CATEGORIES={CATEGORIES}
+                  CATEGORIES={translatedCategories}
                   openCatId={openCatId}
                   activeCategory={activeCategory}
                   setOpenCatId={setOpenCatId}
