@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { MapManager } from "./MapManager";
+import { cn } from "../utils/utils";
 
 export function ZoomPill({ className = "" }: { className?: string }) {
   const mgr = MapManager.getInstance();
@@ -11,12 +12,10 @@ export function ZoomPill({ className = "" }: { className?: string }) {
     <div
       aria-label="Map zoom controls"
       aria-orientation="vertical"
-      className={`
-        inline-flex flex-col items-center justify-center
-        rounded-full overflow-hidden
-        bg-white/90 backdrop-blur-md shadow-md shadow-black/10
-        ${className}
-      `}
+      className={cn(
+        "inline-flex flex-col items-center justify-center bg-white/90 backdrop-blur-md shadow-md shadow-black/10 rounded-full overflow-hidden",
+        className,
+      )}
     >
       <button
         type="button"

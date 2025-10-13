@@ -99,10 +99,8 @@ export function Sidebar({
         {/* Utility group */}
         <LocateMeButton className="!bg-white/90" />
         <PlacesList /> {/* keeps its own popover; button fits the dock */}
-        {/* Zoom (wrapped for consistent look) */}
-        <div className="rounded-2xl bg-white/90 shadow-md ring-1 ring-black/5 overflow-hidden">
-          <ZoomPill />
-        </div>
+        {/* Zoom */}
+        <ZoomPill className="rounded-2xl ring-1 ring-black/5" />
         {/* thin divider */}
         <div className="h-px w-9 bg-gradient-to-r from-transparent via-black/10 to-transparent my-1" />
         {/* Bottom group */}
