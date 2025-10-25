@@ -33,6 +33,46 @@
   "basemap.option.mapbox_nav_night.label": "Navigation Nuit (Mapbox)",
   "basemap.option.mapbox_nav_night.desc": "Style nocturne conçu pour une utilisation en voiture.",
   "basemap.tip": "Astuce : vous pouvez changer de couche à tout moment. Vos couches de données personnalisées se rechargeront automatiquement.",
+  "layer": {
+    "actions": {
+      "close": "Fermer",
+      "getDirections": "Obtenir l’itinéraire",
+      "clearRoute": "Effacer l’itinéraire"
+    },
+    "route": {
+      "distanceLabel": "Distance",
+      "timeLabel": "Temps",
+      "unit": {
+        "kilometer": "km",
+        "minute": "min"
+      },
+      "showLess": "Afficher moins",
+      "showFullRoute_one": "Afficher tout l’itinéraire (+{{count}} étape)",
+      "showFullRoute_other": "Afficher tout l’itinéraire (+{{count}} étapes)",
+      "hideSteps": "Masquer",
+      "remainingSteps_one": "+ {{count}} étape supplémentaire…",
+      "remainingSteps_other": "+ {{count}} étapes supplémentaires…"
+    },
+    "default": {
+      "zoneLabel": "Zone",
+      "addressLabel": "Adresse"
+    },
+    "event": {
+      "sportsLabel_one": "{{padded}} sport",
+      "sportsLabel_other": "{{padded}} sports"
+    },
+    "errors": {
+      "noCoordinates": "Aucune coordonnée de destination disponible pour ce lieu.",
+      "geolocationUnsupported": "La géolocalisation n’est pas prise en charge par votre navigateur.",
+      "directionsUnavailable": "Impossible de récupérer l’itinéraire",
+      "locationUnavailable": "Impossible de récupérer votre position."
+    },
+    "fallbacks": {
+      "noAddress": "Aucune adresse fournie",
+      "defaultTagEvent": "Événement",
+      "defaultTagOutdoor": "Plein air"
+    }
+  },
   "placeCategory": {
     "competition": "Sites de compétition",
     "training": "Sites d’entraînement",

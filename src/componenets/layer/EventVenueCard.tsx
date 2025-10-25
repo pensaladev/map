@@ -5,6 +5,7 @@ import type { VenueSport } from "../../data/sitesMeta";
 import type { RouteDetails } from "../../core/map/types";
 
 import { ManeuverIcon } from "../maneuverIcons";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   title: string;
@@ -71,6 +72,17 @@ const EventVenueCard: React.FC<Props> = ({
   const sports = normSports(sportsIn);
   const [expanded, setExpanded] = useState(false);
   const routePanelId = useId();
+  const { t } = useTranslation();
+  const hasSportCount = typeof sportCount === "number";
+  const paddedSportCount = hasSportCount
+    ? String(sportCount).padStart(2, "0")
+    : "";
+  const sportsCountLabel = hasSportCount
+    ? t("layer.event.sportsLabel", {
+        count: sportCount,
+        padded: paddedSportCount,
+      })
+    : "";
 
   const visibleSteps = route
     ? expanded
@@ -117,10 +129,9 @@ const EventVenueCard: React.FC<Props> = ({
           {title}
         </h3>
 
-        {(shortCode || sportCount) && (
+        {(shortCode || sportsCountLabel) && (
           <div className="mt-1 text-[11px] tracking-widest text-white">
-            {shortCode ?? ""} {shortCode && " ///// "}{" "}
-            {sportCount ? `${String(sportCount).padStart(2, "0")} Sports` : ""}
+            {shortCode ?? ""} {shortCode && " ///// "} {sportsCountLabel}
           </div>
         )}
       </div>
@@ -168,11 +179,14 @@ const EventVenueCard: React.FC<Props> = ({
           <div className="mt-2 text-xs text-gray-800 bg-white/85 rounded px-2 py-1 shadow-sm">
             <div className="flex flex-wrap gap-3">
               <div>
-                <strong>Distance:</strong> {(route.distance / 1000).toFixed(2)}{" "}
-                km
+                <strong>{t("layer.route.distanceLabel")}:</strong>{" "}
+                {(route.distance / 1000).toFixed(2)}{" "}
+                {t("layer.route.unit.kilometer")}
               </div>
               <div>
-                <strong>Time:</strong> {Math.round(route.duration / 60)} min
+                <strong>{t("layer.route.timeLabel")}:</strong>{" "}
+                {Math.round(route.duration / 60)}{" "}
+                {t("layer.route.unit.minute")}
               </div>
             </div>
 
@@ -197,7 +211,8 @@ const EventVenueCard: React.FC<Props> = ({
                   <span className="text-[12.5px] leading-snug">
                     {s.instruction}{" "}
                     <span className="text-gray-500">
-                      ({(s.distance / 1000).toFixed(1)} km)
+                      ({(s.distance / 1000).toFixed(1)}{" "}
+                      {t("layer.route.unit.kilometer")})
                     </span>
                   </span>
                 </li>
@@ -213,7 +228,9 @@ const EventVenueCard: React.FC<Props> = ({
                 aria-expanded={expanded}
                 aria-controls={routePanelId}
               >
-                {expanded ? "Hide" : `Show full route (+${remaining} steps)`}
+                {expanded
+                  ? t("layer.route.hideSteps")
+                  : t("layer.route.showFullRoute", { count: remaining })}
               </button>
             )}
           </div>
@@ -224,7 +241,7 @@ const EventVenueCard: React.FC<Props> = ({
             className="flex-1 bg-white rounded-3xl hover:bg-blue-100 font-semibold text-sm px-3 py-1.5 transition duration-300"
             style={{ color: `${g1}` }}
           >
-            Get Directions
+            {t("layer.actions.getDirections")}
           </button>
           {route && (
             <button
@@ -232,13 +249,13 @@ const EventVenueCard: React.FC<Props> = ({
               className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-sm px-4 w-fit py-1.5 transition"
               style={{ color: `${g1}` }}
             >
-              Clear Route
+              {t("layer.actions.clearRoute")}
             </button>
           )}
           <button
             onClick={onClose}
             className="w-8 h-8 bg-white hover:bg-gray-50 rounded-full flex items-center justify-center"
-            aria-label="Close"
+            aria-label={t("layer.actions.close")}
           >
             <Icon
               icon="mdi:close"

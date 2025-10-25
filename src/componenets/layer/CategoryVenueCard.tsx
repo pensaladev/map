@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import type { RouteDetails } from "../../core/map/types";
 import { MapManager } from "../../core/MapManager";
 import { ManeuverIcon } from "../maneuverIcons";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   title: string;
@@ -47,6 +48,7 @@ const CategoryVenueCard: React.FC<Props> = ({
   const [route, setRoute] = useState<RouteDetails | null>(null);
   const [expanded, setExpanded] = useState(false);
   const routePanelId = useId();
+  const { t } = useTranslation();
 
   const visibleSteps = route
     ? expanded
@@ -116,7 +118,7 @@ const CategoryVenueCard: React.FC<Props> = ({
           <button
             onClick={onClose}
             className="absolute right-2 top-2 w-8 h-8 bg-black/30 hover:bg-black/40 rounded-full grid place-items-center transition"
-            aria-label="Close"
+            aria-label={t("layer.actions.close")}
           >
             <Icon icon="mdi:close" className="text-white text-xl" />
           </button>
@@ -144,7 +146,7 @@ const CategoryVenueCard: React.FC<Props> = ({
           <button
             onClick={onClose}
             className="w-8 h-8 bg-white/15 hover:bg-white/25 rounded-full grid place-items-center transition"
-            aria-label="Close"
+            aria-label={t("layer.actions.close")}
           >
             <Icon icon="mdi:close" className="text-white text-xl" />
           </button>
@@ -201,11 +203,14 @@ const CategoryVenueCard: React.FC<Props> = ({
           <div className="mt-2 text-xs text-gray-800 bg-white/85 rounded px-2 py-1 shadow-sm">
             <div className="flex flex-wrap gap-3">
               <div>
-                <strong>Distance:</strong> {(route.distance / 1000).toFixed(2)}{" "}
-                km
+                <strong>{t("layer.route.distanceLabel")}:</strong>{" "}
+                {(route.distance / 1000).toFixed(2)}{" "}
+                {t("layer.route.unit.kilometer")}
               </div>
               <div>
-                <strong>Time:</strong> {Math.round(route.duration / 60)} min
+                <strong>{t("layer.route.timeLabel")}:</strong>{" "}
+                {Math.round(route.duration / 60)}{" "}
+                {t("layer.route.unit.minute")}
               </div>
             </div>
 
@@ -230,7 +235,8 @@ const CategoryVenueCard: React.FC<Props> = ({
                   <span className="text-[12.5px] leading-snug">
                     {s.instruction}{" "}
                     <span className="text-gray-500">
-                      ({(s.distance / 1000).toFixed(1)} km)
+                      ({(s.distance / 1000).toFixed(1)}{" "}
+                      {t("layer.route.unit.kilometer")})
                     </span>
                   </span>
                 </li>
@@ -246,8 +252,8 @@ const CategoryVenueCard: React.FC<Props> = ({
                 aria-controls={routePanelId}
               >
                 {expanded
-                  ? "Show less"
-                  : `Show full route (+${remaining} steps)`}
+                  ? t("layer.route.showLess")
+                  : t("layer.route.showFullRoute", { count: remaining })}
               </button>
             )}
           </div>
@@ -258,14 +264,14 @@ const CategoryVenueCard: React.FC<Props> = ({
             onClick={handleGetDirections}
             className="flex-1 bg-black text-white rounded-3xl hover:opacity-90 font-semibold text-sm px-3 py-1.5 transition"
           >
-            Get Directions
+            {t("layer.actions.getDirections")}
           </button>
           {route && (
             <button
               onClick={onClear}
               className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-sm px-4 w-fit py-1.5 transition"
             >
-              Clear Route
+              {t("layer.actions.clearRoute")}
             </button>
           )}
         </div>

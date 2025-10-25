@@ -119,7 +119,7 @@ export async function addZoneLayers(map: Map) {
         source: sourceId,
         layout: {
           "symbol-placement": "point",
-          "text-field": zone.name, // <- from ZONES config
+          // "text-field": zone.name, // <- from ZONES config
           "text-font": ["Open Sans Bold", "Arial Unicode MS Regular"],
           "text-size": [
             "interpolate",

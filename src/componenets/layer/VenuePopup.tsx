@@ -8,6 +8,7 @@ import { MapManager } from "../../core/MapManager";
 import type { RouteDetails } from "../../core/map/types";
 import { toast } from "sonner";
 import { extractDirectionsMessage } from "../../utils/error";
+import { useTranslation } from "react-i18next";
 
 export interface VenuePopupProps {
   title: string;
@@ -107,9 +108,9 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   zone,
   info,
   imageUrl = "https://picsum.photos/300/200",
-  address = "No address provided",
+  address,
   rating = 4.5,
-  tags = ["Event", "Outdoor"],
+  tags,
   coordinates,
   onClose,
   // 🔽 NEW
@@ -124,6 +125,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   website,
   socialHandle,
 }) => {
+  const { t } = useTranslation();
   const [route, setRoute] = useState<{
     distance: number;
     duration: number;
@@ -136,17 +138,27 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
       maneuver?: { type?: string; modifier?: string; exit?: number };
     }[];
   } | null>(null);
+  const resolvedAddress =
+    address && address.trim().length
+      ? address
+      : t("layer.fallbacks.noAddress");
+  const fallbackTags = [
+    t("layer.fallbacks.defaultTagEvent"),
+    t("layer.fallbacks.defaultTagOutdoor"),
+  ];
+  const normalizedTags = normTags(tags);
+  const tagsArr = normalizedTags.length ? normalizedTags : fallbackTags;
 
   const handleGetDirections = () => {
     // reset previous route
     setRoute(null);
 
     if (!coordinates) {
-      toast.error("No destination coordinates available for this place.");
+      toast.error(t("layer.errors.noCoordinates"));
       return;
     }
     if (!("geolocation" in navigator)) {
-      toast.error("Geolocation is not supported by your browser.");
+      toast.error(t("layer.errors.geolocationUnsupported"));
       return;
     }
 
@@ -183,11 +195,13 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
         } catch (e) {
           console.error("Directions failed:", e);
           const msg = extractDirectionsMessage(e);
-          toast.error("Unable to retrieve directions", { description: msg });
+          toast.error(t("layer.errors.directionsUnavailable"), {
+            description: msg,
+          });
         }
       },
       () => {
-        toast.error("Unable to retrieve your location.");
+        toast.error(t("layer.errors.locationUnavailable"));
       },
       { enableHighAccuracy: true, timeout: 8000, maximumAge: 30000 },
     );
@@ -208,7 +222,6 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
 
   const isCompetition = catKey === "competition";
   const showEventCard = isCompetition && (hasSports || !!brandTitle);
-  const tagsArr = normTags(tags);
 
   // Non-competition categories (hotels/restaurants/etc.) get the category card
   if (!showEventCard && catMeta && !isCompetition) {
@@ -217,7 +230,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
         title={title}
         zone={zone}
         info={info}
-        address={address}
+        address={resolvedAddress}
         tags={tagsArr}
         icon={catMeta.icon}
         color={catMeta.color}
@@ -235,7 +248,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
         title={title}
         info={info}
         imageUrl={imageUrl}
-        address={address}
+        address={resolvedAddress}
         tags={tagsArr}
         brandTitle={brandTitle}
         brandSubtitle={brandSubtitle}
@@ -261,7 +274,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
       zone={zone}
       info={info}
       imageUrl={imageUrl}
-      address={address}
+      address={resolvedAddress}
       rating={rating}
       tags={tagsArr}
       route={route}

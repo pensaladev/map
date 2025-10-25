@@ -33,6 +33,46 @@
   "basemap.option.mapbox_nav_night.label": "Navigation Night (Mapbox)",
   "basemap.option.mapbox_nav_night.desc": "Night style designed for in-car use.",
   "basemap.tip": "Tip: You can change layers anytime. Your custom data layers will reload automatically.",
+  "layer": {
+    "actions": {
+      "close": "Close",
+      "getDirections": "Get Directions",
+      "clearRoute": "Clear Route"
+    },
+    "route": {
+      "distanceLabel": "Distance",
+      "timeLabel": "Time",
+      "unit": {
+        "kilometer": "km",
+        "minute": "min"
+      },
+      "showLess": "Show less",
+      "showFullRoute_one": "Show full route (+{{count}} step)",
+      "showFullRoute_other": "Show full route (+{{count}} steps)",
+      "hideSteps": "Hide",
+      "remainingSteps_one": "+ {{count}} more step…",
+      "remainingSteps_other": "+ {{count}} more steps…"
+    },
+    "default": {
+      "zoneLabel": "Zone",
+      "addressLabel": "Address"
+    },
+    "event": {
+      "sportsLabel_one": "{{padded}} Sport",
+      "sportsLabel_other": "{{padded}} Sports"
+    },
+    "errors": {
+      "noCoordinates": "No destination coordinates available for this place.",
+      "geolocationUnsupported": "Geolocation is not supported by your browser.",
+      "directionsUnavailable": "Unable to retrieve directions",
+      "locationUnavailable": "Unable to retrieve your location."
+    },
+    "fallbacks": {
+      "noAddress": "No address provided",
+      "defaultTagEvent": "Event",
+      "defaultTagOutdoor": "Outdoor"
+    }
+  },
   "placeCategory": {
     "competition": "Competition Sites",
     "training": "Training Sites",
