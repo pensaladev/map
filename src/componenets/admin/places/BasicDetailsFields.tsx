@@ -21,6 +21,8 @@ type Props = {
   setAddress: (v: string) => void;
   info: string;
   setInfo: (v: string) => void;
+  infoFr: string;
+  setInfoFr: (v: string) => void;
   rating: number | "";
   setRating: (v: number | "") => void;
   tags: string;
@@ -50,6 +52,8 @@ export default function BasicDetailsFields(props: Props) {
     setAddress,
     info,
     setInfo,
+    infoFr,
+    setInfoFr,
     rating,
     setRating,
     tags,
@@ -136,6 +140,18 @@ export default function BasicDetailsFields(props: Props) {
             placeholder="Historic multi-use stadium in Dakar."
             value={info}
             onChange={(e) => setInfo(e.target.value)}
+          />
+        </Field>
+        <Field
+          id="infoFr"
+          label="About / Info (French)"
+          hint="French description shown when the app is in FR."
+        >
+          <TextArea
+            id="infoFr"
+            placeholder="Description en français…"
+            value={infoFr}
+            onChange={(e) => setInfoFr(e.target.value)}
           />
         </Field>
 

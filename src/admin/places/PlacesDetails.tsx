@@ -170,6 +170,8 @@ export type Place = {
   location?: { latitude: number; longitude: number } | any;
   address?: string;
   info?: string;
+  info_fr?: string | null;
+  infoFr?: string | null;
   rating?: number | null;
   tags?: string[];
   pointColor?: string;
@@ -212,6 +214,7 @@ export function PlaceDetailsPage() {
   const [lng, setLng] = useState<number | "">("");
   const [address, setAddress] = useState("");
   const [info, setInfo] = useState("");
+  const [infoFr, setInfoFr] = useState("");
   const [rating, setRating] = useState<number | "">("");
   const [tags, setTags] = useState<string>("");
   const [pointColor, setPointColor] = useState("#2962FF");
@@ -270,6 +273,9 @@ export function PlaceDetailsPage() {
         setLng(lo ?? "");
         setAddress(d.address || "");
         setInfo(d.info || "");
+        setInfoFr(
+          d.info_fr || (d as any).info_fr || (d as any).infoFr || "",
+        );
         setRating(d.rating ?? "");
         setTags((d.tags || []).join(", "));
         setPointColor(d.pointColor || "#2962FF");
@@ -352,6 +358,7 @@ export function PlaceDetailsPage() {
         location: new GeoPoint(Number(lat), Number(lng)),
         address: address || null,
         info: info || null,
+        info_fr: infoFr || null,
         rating: rating === "" ? null : Number(rating),
         tags: tags
           .split(",")
@@ -555,6 +562,18 @@ export function PlaceDetailsPage() {
                 placeholder="Short description…"
                 value={info}
                 onChange={(e) => setInfo(e.target.value)}
+              />
+            </Field>
+            <Field
+              id="infoFr"
+              label="About / Info (French)"
+              hint="Displayed when the app language is FR."
+            >
+              <TextArea
+                id="infoFr"
+                placeholder="Description en français…"
+                value={infoFr}
+                onChange={(e) => setInfoFr(e.target.value)}
               />
             </Field>
 
@@ -791,6 +810,7 @@ export function PlaceDetailsPage() {
                 shortCode={shortCode}
                 name={name}
                 info={info}
+                infoFr={infoFr}
                 address={address}
                 categoryId={categoryId}
                 sports={sports}

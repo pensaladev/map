@@ -14,6 +14,7 @@ export interface VenuePopupProps {
   title: string;
   zone: string;
   info: string;
+  infoFr?: string;
   imageUrl?: string;
   address?: string;
   rating?: number;
@@ -107,6 +108,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   title,
   zone,
   info,
+  infoFr,
   imageUrl = "https://picsum.photos/300/200",
   address,
   rating = 4.5,
@@ -125,7 +127,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   website,
   socialHandle,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [route, setRoute] = useState<{
     distance: number;
     duration: number;
@@ -216,6 +218,11 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   const catKey = norm(categoryId);
   const catMeta = CATEGORY_ICON[catKey];
 
+  const lang = i18n.resolvedLanguage || i18n.language || "en";
+  const infoLocalized = lang.startsWith("fr")
+    ? (infoFr ?? "").trim() || info
+    : info;
+
   const hasSports = Array.isArray(sports)
     ? sports.length > 0
     : Number(sportCount ?? 0) > 0;
@@ -229,7 +236,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
       <CategoryVenueCard
         title={title}
         zone={zone}
-        info={info}
+        info={infoLocalized}
         address={resolvedAddress}
         tags={tagsArr}
         icon={catMeta.icon}
@@ -246,7 +253,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
     return (
       <EventVenueCard
         title={title}
-        info={info}
+        info={infoLocalized}
         imageUrl={imageUrl}
         address={resolvedAddress}
         tags={tagsArr}
@@ -272,7 +279,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
     <DefaultVenueCard
       title={title}
       zone={zone}
-      info={info}
+      info={infoLocalized}
       imageUrl={imageUrl}
       address={resolvedAddress}
       rating={rating}

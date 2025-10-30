@@ -1,6 +1,7 @@
 // src/admin/places/PlacePreview.tsx
 
 import { Icon } from "@iconify/react";
+import { useTranslation } from "react-i18next";
 import type { VenueSport } from "../../../data/sitesMeta";
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
   // content
   name: string;
   info: string;
+  infoFr?: string;
   address: string;
 
   // meta
@@ -51,6 +53,7 @@ export default function PlacePreview({
   shortCode,
   name,
   info,
+  infoFr,
   address,
   categoryId,
   sports,
@@ -60,6 +63,11 @@ export default function PlacePreview({
   onClose,
   onGetDirections,
 }: Props) {
+  const { i18n } = useTranslation();
+  const activeLang = i18n.resolvedLanguage || i18n.language || "en";
+  const infoText = activeLang.startsWith("fr")
+    ? (infoFr ?? "").trim() || info
+    : info;
   const [g0, g1] = normGradient(gradientFrom, gradientTo);
   const sportCount =
     categoryId === "competition"
@@ -146,7 +154,7 @@ export default function PlacePreview({
 
       {/* Body */}
       <div className=" text-gray-900">
-        <p className="text-sm leading-snug mt-2 text-white">{info}</p>
+        <p className="text-sm leading-snug mt-2 text-white">{infoText}</p>
         <p className="text-xs text-gray-300">{address}</p>
 
         <div className="mt-3 flex gap-2">

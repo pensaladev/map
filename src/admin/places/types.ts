@@ -25,6 +25,7 @@ export interface Place {
   location: GeoPoint;
   address?: string;
   info?: string;
+  info_fr?: string;
   rating?: number;
   tags: string[];
   pointColor?: string;

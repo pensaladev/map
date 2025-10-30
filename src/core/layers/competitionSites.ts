@@ -106,6 +106,8 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
 
         const info =
           (props["info"] as string) || (props["description"] as string) || "";
+        const infoFr =
+          (props["info_fr"] as string) || (props["infoFr"] as string) || "";
 
         const imageUrl = (props["imageUrl"] as string) || undefined;
         const address = (props["address"] as string) || "";
@@ -134,6 +136,7 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
           title,
           zone: z.name,
           info,
+          infoFr,
           imageUrl,
           address,
           rating,

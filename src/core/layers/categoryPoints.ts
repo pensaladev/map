@@ -567,11 +567,15 @@ async function addClusterLayers(
     const title = (p["title"] as string) || (p["Name"] as string) || "Untitled";
     const gradient = gradientFromProps(p);
     const sports = parseArray<VenueSport>(p["sports"]) ?? [];
+    const infoEn = (p["info"] as string) || "";
+    const infoFr =
+      (p["info_fr"] as string) || (p["infoFr"] as string) || "";
     const node = renderVenuePopup({
       title,
       zone: p["zoneName"] || categoryId,
       categoryId: p["categoryId"] || categoryId,
-      info: (p["info"] as string) || "",
+      info: infoEn,
+      infoFr,
       imageUrl: (p["imageUrl"] as string) || undefined,
       address: (p["address"] as string) || "",
       rating:

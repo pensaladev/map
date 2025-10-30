@@ -64,6 +64,7 @@ function buildProps(
     Name: p.name ?? "Untitled", // legacy compatibility (PlacesList uses `Name`)
     address: p.address ?? null,
     info: p.info ?? null,
+    info_fr: p.info_fr ?? p.infoFr ?? null,
     rating: p.rating ?? null,
     tags: Array.isArray(p.tags) ? p.tags : [],
     pointColor: p.pointColor ?? "#2962FF",

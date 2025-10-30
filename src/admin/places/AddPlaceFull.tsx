@@ -55,6 +55,7 @@ export default function AddPlaceFull() {
   const [lng, setLng] = useState<number | "">("");
   const [address, setAddress] = useState("");
   const [info, setInfo] = useState("");
+  const [infoFr, setInfoFr] = useState("");
   const [rating, setRating] = useState<number | "">("");
   const [tags, setTags] = useState<string>("");
 
@@ -277,6 +278,7 @@ export default function AddPlaceFull() {
         location: new GeoPoint(Number(lat), Number(lng)),
         address: address || null,
         info: info || null,
+        info_fr: infoFr || null,
         rating: rating === "" ? null : Number(rating),
         tags: tags
           .split(",")
@@ -313,6 +315,7 @@ export default function AddPlaceFull() {
       setLng("");
       setAddress("");
       setInfo("");
+      setInfoFr("");
       setRating("");
       setTags("");
       setPointColor("#2962FF");
@@ -411,6 +414,8 @@ export default function AddPlaceFull() {
             setAddress={setAddress}
             info={info}
             setInfo={setInfo}
+            infoFr={infoFr}
+            setInfoFr={setInfoFr}
             rating={rating}
             setRating={setRating}
             tags={tags}
@@ -522,6 +527,7 @@ export default function AddPlaceFull() {
                 shortCode={shortCode}
                 name={name}
                 info={info}
+                infoFr={infoFr}
                 address={address}
                 categoryId={categoryId}
                 sports={sports}
