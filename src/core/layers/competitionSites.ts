@@ -108,6 +108,12 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
           (props["info"] as string) || (props["description"] as string) || "";
         const infoFr =
           (props["info_fr"] as string) || (props["infoFr"] as string) || "";
+        console.log("[competitionSites] popup info", {
+          title,
+          info,
+          infoFr,
+          props,
+        });
 
         const imageUrl = (props["imageUrl"] as string) || undefined;
         const address = (props["address"] as string) || "";

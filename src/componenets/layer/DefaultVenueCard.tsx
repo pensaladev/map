@@ -21,6 +21,7 @@ type Props = {
   title: string;
   zone: string;
   info: string;
+  infoFr?: string;
   imageUrl: string;
   address: string;
   rating: number;
@@ -35,6 +36,7 @@ const DefaultVenueCard: React.FC<Props> = ({
   title,
   zone,
   info,
+  infoFr,
   imageUrl,
   address,
   rating,
@@ -44,7 +46,11 @@ const DefaultVenueCard: React.FC<Props> = ({
   onClose,
   onClear,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.resolvedLanguage || i18n.language || "en";
+  const infoText = lang.startsWith("fr")
+    ? (infoFr ?? "").trim() || info
+    : info;
 
   return (
     <div
@@ -78,7 +84,7 @@ const DefaultVenueCard: React.FC<Props> = ({
           </span>
         </div>
 
-        <p className="text-sm text-gray-800 leading-snug mb-2">{info}</p>
+        <p className="text-sm text-gray-800 leading-snug mb-2">{infoText}</p>
         <p className="text-xs text-gray-600 mb-2">
           <strong>{t("layer.default.addressLabel")}:</strong> {address}
         </p>

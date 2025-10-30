@@ -1,5 +1,5 @@
 // src/components/map/EventVenueCard.tsx
-import React, { useId, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import type { VenueSport } from "../../data/sitesMeta";
 import type { RouteDetails } from "../../core/map/types";
@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 type Props = {
   title: string;
   info: string;
+  infoFr?: string;
   imageUrl?: string; // defensive: may be absent
   address?: string;
   tags?: string[];
@@ -51,6 +52,7 @@ function normSports(s?: Props["sports"]): VenueSport[] {
 const EventVenueCard: React.FC<Props> = ({
   title,
   info,
+  infoFr,
   imageUrl,
   address,
   tags,
@@ -72,7 +74,19 @@ const EventVenueCard: React.FC<Props> = ({
   const sports = normSports(sportsIn);
   const [expanded, setExpanded] = useState(false);
   const routePanelId = useId();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.resolvedLanguage || i18n.language || "en";
+  const infoText = lang.startsWith("fr") ? (infoFr ?? "").trim() || info : info;
+
+  useEffect(() => {
+    console.log("[EventVenueCard] info props", {
+      title,
+      lang,
+      info,
+      infoFr,
+      renderedInfo: infoText,
+    });
+  }, [title, lang, info, infoFr, infoText]);
   const hasSportCount = typeof sportCount === "number";
   const paddedSportCount = hasSportCount
     ? String(sportCount).padStart(2, "0")
@@ -172,7 +186,7 @@ const EventVenueCard: React.FC<Props> = ({
 
       {/* Body */}
       <div className=" text-gray-900">
-        <p className="text-xs leading-snug text-white">{info}</p>
+        <p className="text-xs leading-snug text-white">{infoText}</p>
         <p className="text-sm mt-1 text-gray-300">{address}</p>
 
         {route && (
@@ -185,8 +199,7 @@ const EventVenueCard: React.FC<Props> = ({
               </div>
               <div>
                 <strong>{t("layer.route.timeLabel")}:</strong>{" "}
-                {Math.round(route.duration / 60)}{" "}
-                {t("layer.route.unit.minute")}
+                {Math.round(route.duration / 60)} {t("layer.route.unit.minute")}
               </div>
             </div>
 

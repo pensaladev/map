@@ -1,5 +1,5 @@
 // src/components/map/VenuePopup.tsx (or wherever your VenuePopup lives)
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { VenueSport } from "../../data/sitesMeta";
 import EventVenueCard from "./EventVenueCard";
 import DefaultVenueCard from "./DefaultVenueCard";
@@ -214,14 +214,35 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
     setRoute(null);
   };
 
+  const [infoOverride, setInfoOverride] = useState<"en" | "fr" | null>(null);
+
   // 🔑 Decide popup type using categoryId (not the zone name)
   const catKey = norm(categoryId);
   const catMeta = CATEGORY_ICON[catKey];
 
-  const lang = i18n.resolvedLanguage || i18n.language || "en";
-  const infoLocalized = lang.startsWith("fr")
-    ? (infoFr ?? "").trim() || info
-    : info;
+  const langRaw = i18n.resolvedLanguage || i18n.language || "en";
+  const langCode = (langRaw ?? "en").split("-")[0] || "en";
+  const activeInfoLang = infoOverride ?? langCode;
+  const infoLocalized =
+    activeInfoLang === "fr" ? (infoFr ?? "").trim() || info : info;
+
+  useEffect(() => {
+    setInfoOverride(null);
+  }, [langCode, info, infoFr]);
+
+  useEffect(() => {
+    // Debug payload from backend to verify translations
+    console.log("[VenuePopup] info payload", {
+      title,
+      langRaw,
+      langCode,
+      info,
+      infoFr,
+      infoOverride,
+      activeInfoLang,
+      infoLocalized,
+    });
+  }, [title, langRaw, langCode, info, infoFr, infoOverride, activeInfoLang, infoLocalized]);
 
   const hasSports = Array.isArray(sports)
     ? sports.length > 0
@@ -230,64 +251,92 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   const isCompetition = catKey === "competition";
   const showEventCard = isCompetition && (hasSports || !!brandTitle);
 
-  // Non-competition categories (hotels/restaurants/etc.) get the category card
-  if (!showEventCard && catMeta && !isCompetition) {
+  const card = (() => {
+    if (!showEventCard && catMeta && !isCompetition) {
+      return (
+        <CategoryVenueCard
+          key={`category-${activeInfoLang}`}
+          title={title}
+          zone={zone}
+          info={infoLocalized}
+          infoFr={infoFr}
+          address={resolvedAddress}
+          tags={tagsArr}
+          icon={catMeta.icon}
+          color={catMeta.color}
+          onClose={onClose}
+          onGetDirections={handleGetDirections}
+          coordinates={coordinates}
+          onClear={handleClear}
+        />
+      );
+    }
+
+    if (showEventCard) {
+      return (
+        <EventVenueCard
+          key={`event-${activeInfoLang}`}
+          title={title}
+          info={infoLocalized}
+          infoFr={infoFr}
+          imageUrl={imageUrl}
+          address={resolvedAddress}
+          tags={tagsArr}
+          brandTitle={brandTitle}
+          brandSubtitle={brandSubtitle}
+          locationLabel={locationLabel}
+          shortCode={shortCode}
+          sportCount={sportCount}
+          sports={Array.isArray(sports) ? sports : []}
+          gradient={[gradient?.[0] ?? "#12B76A", gradient?.[1] ?? "#0A6B4A"]}
+          website={website}
+          socialHandle={socialHandle}
+          onClose={onClose}
+          onGetDirections={handleGetDirections}
+          onClear={handleClear}
+          route={route}
+        />
+      );
+    }
+
     return (
-      <CategoryVenueCard
+      <DefaultVenueCard
+        key={`default-${activeInfoLang}`}
         title={title}
         zone={zone}
         info={infoLocalized}
-        address={resolvedAddress}
-        tags={tagsArr}
-        icon={catMeta.icon}
-        color={catMeta.color}
-        onClose={onClose}
-        onGetDirections={handleGetDirections}
-        coordinates={coordinates}
-        onClear={handleClear}
-      />
-    );
-  }
-
-  if (showEventCard) {
-    return (
-      <EventVenueCard
-        title={title}
-        info={infoLocalized}
+        infoFr={infoFr}
         imageUrl={imageUrl}
         address={resolvedAddress}
+        rating={rating}
         tags={tagsArr}
-        brandTitle={brandTitle}
-        brandSubtitle={brandSubtitle}
-        locationLabel={locationLabel}
-        shortCode={shortCode}
-        sportCount={sportCount}
-        sports={Array.isArray(sports) ? sports : []}
-        gradient={[gradient?.[0] ?? "#12B76A", gradient?.[1] ?? "#0A6B4A"]}
-        website={website}
-        socialHandle={socialHandle}
-        onClose={onClose}
-        onGetDirections={handleGetDirections}
-        onClear={handleClear}
         route={route}
+        onGetDirections={handleGetDirections}
+        onClose={onClose}
+        onClear={handleClear}
       />
     );
-  }
+  })();
 
-  // Fallback
+  const handleToggleInfoLang = () => {
+    setInfoOverride((prev) => {
+      if (prev === "fr") return "en";
+      if (prev === "en") return "fr";
+      return langCode === "fr" ? "en" : "fr";
+    });
+  };
+
   return (
-    <DefaultVenueCard
-      title={title}
-      zone={zone}
-      info={infoLocalized}
-      imageUrl={imageUrl}
-      address={resolvedAddress}
-      rating={rating}
-      tags={tagsArr}
-      route={route}
-      onGetDirections={handleGetDirections}
-      onClose={onClose}
-      onClear={handleClear}
-    />
+    <div className="relative">
+      <button
+        type="button"
+        onClick={handleToggleInfoLang}
+        className="absolute left-3 top-3 z-[60] rounded-full bg-black/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white shadow hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white/60"
+        aria-label="Toggle info language"
+      >
+        Info: {activeInfoLang === "fr" ? "FR" : "EN"}
+      </button>
+      {card}
+    </div>
   );
 };

@@ -10,6 +10,7 @@ type Props = {
   title: string;
   zone: string; // e.g., "Hotels", "Restaurants"
   info?: string;
+  infoFr?: string;
   address?: string;
   tags?: string[];
   icon: string; // iconify name e.g. "mdi:hotel"
@@ -30,6 +31,7 @@ const CategoryVenueCard: React.FC<Props> = ({
   title,
   zone,
   info = "",
+  infoFr = "",
   address = "",
   tags,
   icon,
@@ -48,7 +50,9 @@ const CategoryVenueCard: React.FC<Props> = ({
   const [route, setRoute] = useState<RouteDetails | null>(null);
   const [expanded, setExpanded] = useState(false);
   const routePanelId = useId();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.resolvedLanguage || i18n.language || "en";
+  const infoText = lang.startsWith("fr") ? infoFr.trim() || info : info;
 
   const visibleSteps = route
     ? expanded
@@ -155,7 +159,7 @@ const CategoryVenueCard: React.FC<Props> = ({
 
       {/* Body */}
       <div className="p-3 text-sm text-gray-800">
-        {info && <p className="mb-1">{info}</p>}
+        {infoText && <p className="mb-1">{infoText}</p>}
         {address && <p className="text-xs text-gray-500">{address}</p>}
 
         {/* Extra place facts */}
