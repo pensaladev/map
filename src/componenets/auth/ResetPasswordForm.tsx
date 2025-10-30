@@ -1,5 +1,6 @@
 // src/auth/ResetPasswordForm.tsx
 import { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { resetPassword } from "../../auth/authService";
 
 export function ResetPasswordForm({ onLogin }: { onLogin: () => void }) {
@@ -7,6 +8,7 @@ export function ResetPasswordForm({ onLogin }: { onLogin: () => void }) {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,18 +30,20 @@ export function ResetPasswordForm({ onLogin }: { onLogin: () => void }) {
         {!sent ? (
           <>
             <p className="text-sm text-gray-600">
-              Enter your email and we’ll send you a reset link.
+              {t("auth.reset.intro")}
             </p>
 
             <div>
-              <label className="text-sm font-medium">Email</label>
+              <label className="text-sm font-medium">
+                {t("auth.common.emailLabel")}
+              </label>
               <input
                 className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.currentTarget.value)}
-                placeholder="you@example.com"
+                placeholder={t("auth.common.emailPlaceholder")}
               />
             </div>
 
@@ -51,8 +55,11 @@ export function ResetPasswordForm({ onLogin }: { onLogin: () => void }) {
           </>
         ) : (
           <div className="rounded-lg bg-green-50 border border-green-200 p-3 text-sm">
-            If an account exists for <b>{email}</b>, a reset link has been sent.
-            Please check your inbox.
+            <Trans
+              i18nKey="auth.reset.sentDescription"
+              values={{ email }}
+              components={{ strong: <b /> }}
+            />
           </div>
         )}
       </div>
@@ -64,7 +71,7 @@ export function ResetPasswordForm({ onLogin }: { onLogin: () => void }) {
             disabled={loading}
             className="w-full rounded-lg bg-black text-white py-2.5 font-medium hover:bg-black/90 active:scale-[.99] transition disabled:opacity-60"
           >
-            {loading ? "Sending..." : "Send reset link"}
+            {loading ? t("auth.reset.submitting") : t("auth.reset.submit")}
           </button>
         ) : (
           <button
@@ -72,7 +79,7 @@ export function ResetPasswordForm({ onLogin }: { onLogin: () => void }) {
             onClick={onLogin}
             className="w-full rounded-lg bg-black text-white py-2.5 font-medium hover:bg-black/90 active:scale-[.99] transition"
           >
-            Back to sign in
+            {t("auth.reset.backToLogin")}
           </button>
         )}
       </div>

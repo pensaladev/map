@@ -101,5 +101,51 @@
     "bus": "Bus Station",
     "ferry": "Ferry",
     "railway": "Railway Station"
+  },
+  "auth": {
+    "modal": {
+      "title": {
+        "login": "Welcome back",
+        "register": "Create account",
+        "reset": "Reset password",
+        "profile": "Your profile"
+      },
+      "loading": "Loading…"
+    },
+    "common": {
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "••••••••",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Jane Doe",
+      "terms": "I agree to the Terms & Privacy Policy.",
+      "backToSignIn": "Back to sign in",
+      "close": "Close"
+    },
+    "login": {
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "createAccount": "Create an account"
+    },
+    "register": {
+      "passwordPlaceholder": "At least 8 characters",
+      "submit": "Create account",
+      "submitting": "Creating account…"
+    },
+    "reset": {
+      "intro": "Enter your email and we’ll send you a reset link.",
+      "submit": "Send reset link",
+      "submitting": "Sending…",
+      "sentDescription": "If an account exists for <strong>{{email}}</strong>, a reset link has been sent. Please check your inbox.",
+      "backToLogin": "Back to sign in"
+    },
+    "profile": {
+      "fallbackName": "User",
+      "adminCta": "Admin",
+      "logout": "Logout",
+      "close": "Close"
+    }
   }
 }

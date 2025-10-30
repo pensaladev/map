@@ -4,6 +4,7 @@ import type { User } from "firebase/auth";
 import { signOut } from "../../auth/authService";
 import { Link } from "react-router-dom";
 import { useRole } from "../../auth/hooks/useRole";
+import { useTranslation } from "react-i18next";
 
 export function ProfileView({
   user,
@@ -16,6 +17,7 @@ export function ProfileView({
   const displayName = user?.displayName ?? "";
   const email = user?.email ?? "";
   const photoURL = user?.photoURL ?? "";
+  const { t } = useTranslation();
 
   async function handleLogout() {
     await signOut();
@@ -41,7 +43,7 @@ export function ProfileView({
         {/* Basic info */}
         <div>
           <div className="text-lg font-semibold">
-            {displayName || email || "User"}
+            {displayName || email || t("auth.profile.fallbackName")}
           </div>
           {email && <div className="text-sm text-gray-600">{email}</div>}
         </div>
@@ -49,8 +51,11 @@ export function ProfileView({
 
       {!loading && role === "admin" && (
         <div className="w-full flex justify-center items-center">
-          <Link to="/admin" className="rounded bg-black text-white px-3 py-1.5">
-            Admin
+          <Link
+            to="/admin"
+            className="rounded bg-black text-white px-3 py-1.5 font-medium hover:bg-black/90 transition"
+          >
+            {t("auth.profile.adminCta")}
           </Link>
         </div>
       )}
@@ -61,13 +66,13 @@ export function ProfileView({
           onClick={handleLogout}
           className="w-full rounded-lg bg-black text-white py-2.5 font-medium hover:bg-black/90 active:scale-[.99] transition"
         >
-          Logout
+          {t("auth.profile.logout")}
         </button>
         <button
           onClick={onClose}
           className="w-full rounded-lg border py-2.5 font-medium hover:bg-gray-50 active:scale-[.99] transition"
         >
-          Close
+          {t("auth.profile.close")}
         </button>
       </div>
     </div>

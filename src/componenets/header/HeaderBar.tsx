@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { LogoBrand } from "./LogoBrand";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ProfileMenu } from "../ProfileMenu";
@@ -10,7 +9,6 @@ type Props = {
 };
 
 export function HeaderBar({ onReset }: Props) {
-  const [lang, setLang] = useState<"fr" | "en">("en");
   const { t } = useTranslation();
 
   return (
@@ -38,7 +36,7 @@ export function HeaderBar({ onReset }: Props) {
 
           {/* right: flags + profile */}
           <div className="flex items-center gap-3">
-            <LanguageSwitcher value={lang} onChange={setLang} />
+            <LanguageSwitcher />
             <ProfileMenu />
           </div>
         </div>

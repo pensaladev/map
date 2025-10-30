@@ -101,5 +101,51 @@
     "bus": "Gare routière",
     "ferry": "Ferry",
     "railway": "Gare ferroviaire"
+  },
+  "auth": {
+    "modal": {
+      "title": {
+        "login": "Bon retour",
+        "register": "Créer un compte",
+        "reset": "Réinitialiser le mot de passe",
+        "profile": "Votre profil"
+      },
+      "loading": "Chargement…"
+    },
+    "common": {
+      "emailLabel": "E-mail",
+      "passwordLabel": "Mot de passe",
+      "emailPlaceholder": "vous@exemple.com",
+      "passwordPlaceholder": "••••••••",
+      "nameLabel": "Nom complet",
+      "namePlaceholder": "Jane Doe",
+      "terms": "J’accepte les Conditions et la Politique de confidentialité.",
+      "backToSignIn": "Retour à la connexion",
+      "close": "Fermer"
+    },
+    "login": {
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "submitting": "Connexion…",
+      "createAccount": "Créer un compte"
+    },
+    "register": {
+      "passwordPlaceholder": "Au moins 8 caractères",
+      "submit": "Créer un compte",
+      "submitting": "Création du compte…"
+    },
+    "reset": {
+      "intro": "Saisissez votre e-mail et nous vous enverrons un lien de réinitialisation.",
+      "submit": "Envoyer le lien de réinitialisation",
+      "submitting": "Envoi…",
+      "sentDescription": "Si un compte existe pour <strong>{{email}}</strong>, un lien de réinitialisation a été envoyé. Veuillez vérifier votre boîte mail.",
+      "backToLogin": "Retour à la connexion"
+    },
+    "profile": {
+      "fallbackName": "Utilisateur",
+      "adminCta": "Admin",
+      "logout": "Se déconnecter",
+      "close": "Fermer"
+    }
   }
 }

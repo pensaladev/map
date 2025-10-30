@@ -1,32 +1,73 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useTranslation } from "react-i18next";
 
+type Lang = "fr" | "en";
+
 type Props = {
-  value?: "fr" | "en";
-  onChange?: (lang: "fr" | "en") => void;
+  value?: Lang;
+  onChange?: (lang: Lang) => void;
 };
 
-export function LanguageSwitcher({}: Props) {
+const normalizeLang = (lang?: string): Lang => {
+  if (lang?.startsWith("fr")) return "fr";
+  return "en";
+};
+
+const buttons: Array<{ code: Lang; icon: string; label: string; aria: string }> =
+  [
+    {
+      code: "fr",
+      icon: "emojione:flag-for-france",
+      label: "FR",
+      aria: "Switch to French",
+    },
+    {
+      code: "en",
+      icon: "circle-flags:uk",
+      label: "EN",
+      aria: "Switch to English",
+    },
+  ];
+
+export function LanguageSwitcher({ value, onChange }: Props) {
   const { i18n } = useTranslation();
+  const activeLang =
+    value ?? normalizeLang(i18n.resolvedLanguage ?? i18n.language);
+
+  const handleSelect = (lang: Lang) => {
+    if (normalizeLang(i18n.language) !== lang) {
+      void i18n.changeLanguage(lang);
+    }
+    onChange?.(lang);
+  };
 
   return (
     <div className="flex items-center gap-2">
-      <button
-        onClick={() => i18n.changeLanguage("fr")}
-        aria-label="Switch to French"
-        className="h-10 p-1 w-10 bg-gray-100 flex justify-center items-center rounded-full hover:bg-gray-200 transition"
-        title="Profile"
-      >
-        <Icon icon="emojione:flag-for-france" className="h-full w-full" />
-      </button>
-      <button
-        onClick={() => i18n.changeLanguage("en")}
-        aria-label="Switch to English"
-        className="h-10 p-1 w-10 bg-gray-100 flex justify-center items-center rounded-full hover:bg-gray-200 transition"
-        title="Profile"
-      >
-        <Icon icon="circle-flags:uk" className="h-full w-full" />
-      </button>
+      {buttons.map(({ code, icon, label, aria }) => {
+        const isActive = activeLang === code;
+        return (
+          <button
+            key={code}
+            onClick={() => handleSelect(code)}
+            aria-label={aria}
+            className={`relative flex h-10 w-10 items-center justify-center rounded-full p-1 transition ${
+              isActive
+                ? "bg-emerald-100/80 ring-2 ring-emerald-500 shadow-sm"
+                : "bg-gray-100 hover:bg-gray-200"
+            }`}
+            type="button"
+          >
+            <Icon icon={icon} className="h-full w-full" />
+            <span
+              className={`pointer-events-none absolute -bottom-1 rounded-full px-1 text-[10px] font-semibold uppercase tracking-wide ${
+                isActive ? "bg-emerald-500 text-white" : "bg-white/80 text-gray-600"
+              }`}
+            >
+              {label}
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 }

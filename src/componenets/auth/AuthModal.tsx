@@ -6,8 +6,16 @@ import { ResetPasswordForm } from "./ResetPasswordForm";
 import { ProfileView } from "./ProfileView";
 import { useAuthUser } from "../../auth/hooks/useAuthUser";
 import { Modal } from "../common/Modal";
+import { useTranslation } from "react-i18next";
 
 type AuthView = "login" | "register" | "reset" | "profile";
+
+const TITLE_BY_VIEW: Record<AuthView, string> = {
+  login: "auth.modal.title.login",
+  register: "auth.modal.title.register",
+  reset: "auth.modal.title.reset",
+  profile: "auth.modal.title.profile",
+};
 
 export function AuthModal({
   isOpen,
@@ -21,6 +29,7 @@ export function AuthModal({
   const { user, loading } = useAuthUser();
   const [view, setView] = useState<AuthView>(initialView);
   const [mounted, setMounted] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => setMounted(true), []);
   useEffect(() => {
@@ -38,14 +47,7 @@ export function AuthModal({
 
   if (!mounted || !isOpen) return null;
 
-  const headerTitle =
-    view === "profile"
-      ? "Your profile"
-      : view === "login"
-      ? "Welcome back"
-      : view === "register"
-      ? "Create account"
-      : "Reset password";
+  const headerTitle = t(TITLE_BY_VIEW[view]);
 
   return (
     <Modal
@@ -61,7 +63,7 @@ export function AuthModal({
         <div className="grid place-items-center h-full">
           <div className="flex items-center gap-3 text-gray-600">
             <span className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-gray-700" />
-            <span>Loading…</span>
+            <span>{t("auth.modal.loading")}</span>
           </div>
         </div>
       ) : (

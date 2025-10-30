@@ -1,5 +1,6 @@
 // auth/LoginForm.tsx
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { signIn } from "../../auth/authService";
 
 export function LoginForm({
@@ -15,6 +16,7 @@ export function LoginForm({
   const [pw, setPw] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,25 +36,29 @@ export function LoginForm({
     <form onSubmit={submit} className="flex h-full flex-col">
       <div className="flex-1 space-y-4 overflow-y-auto">
         <div>
-          <label className="text-sm font-medium">Email</label>
+          <label className="text-sm font-medium">
+            {t("auth.common.emailLabel")}
+          </label>
           <input
             className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.currentTarget.value)}
-            placeholder="you@example.com"
+            placeholder={t("auth.common.emailPlaceholder")}
           />
         </div>
         <div>
-          <label className="text-sm font-medium">Password</label>
+          <label className="text-sm font-medium">
+            {t("auth.common.passwordLabel")}
+          </label>
           <input
             className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-black/10"
             type="password"
             required
             value={pw}
             onChange={(e) => setPw(e.currentTarget.value)}
-            placeholder="••••••••"
+            placeholder={t("auth.common.passwordPlaceholder")}
           />
         </div>
 
@@ -62,7 +68,7 @@ export function LoginForm({
             onClick={onForgot}
             className="text-sm text-blue-600 hover:underline"
           >
-            Forgot password?
+            {t("auth.login.forgotPassword")}
           </button>
         </div>
       </div>
@@ -79,14 +85,14 @@ export function LoginForm({
           disabled={loading}
           className="w-full rounded-lg bg-black text-white py-2.5 font-medium hover:bg-black/90 active:scale-[.99] transition disabled:opacity-60"
         >
-          {loading ? "Signing in..." : "Sign in"}
+          {loading ? t("auth.login.submitting") : t("auth.login.submit")}
         </button>
         <button
           type="button"
           onClick={onRegister}
           className="w-full rounded-lg border py-2.5 font-medium hover:bg-gray-50 active:scale-[.99] transition"
         >
-          Create an account
+          {t("auth.login.createAccount")}
         </button>
       </div>
     </form>
