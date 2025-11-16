@@ -38,7 +38,7 @@ export default function MapPage() {
 
   return (
     <div className="relative w-full h-[100dvh]">
-      <HeaderBar title="DAKAR JO 2026 MAP" onReset={handleReset} />
+      <HeaderBar title="DAKAR JOJ 2026 MAP" onReset={handleReset} />
       {/* Top-left: Admin link (only if admin) */}
 
       {/* Sidebar (original) */}
