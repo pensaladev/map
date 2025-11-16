@@ -16,6 +16,7 @@ export type VenueMeta = {
   rating?: number;
   tags?: string[];
   info?: string;
+  info_fr?: string;
   pointColor?: string;
 
   // new (for Dakar 2026 card style)
@@ -40,6 +41,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
       tags: ["Stadium", "Sports", "Events"],
       pointColor: "#E91E63",
       info: "Historic multi-use stadium in Dakar.",
+      info_fr: "Stade historique polyvalent de Dakar.",
     },
     "Egg Tower Complex": {
       imageUrl: "/v-img/egg-tower.jpg",
@@ -59,6 +61,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
       socialHandle: "@jojdakar2026",
 
       info: "Centre des expositions de Diamniadio (Dakar Expo Center).",
+      info_fr: "Centre des expositions de Diamniadio (Dakar Expo Center).",
 
       sports: [
         // Material Design Icons set is broad and stable:
@@ -87,6 +90,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
       tags: ["Coast", "Scenic", "Outdoor"],
       pointColor: "#03A9F4",
       info: "Scenic coastal road and recreation area.",
+      info_fr: "Route côtière pittoresque et espace de loisirs.",
     },
   },
 
@@ -117,6 +121,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
         // },
       ],
       info: "State-of-the-art multi-purpose arena.",
+      info_fr: "Arène polyvalente ultramoderne.",
     },
     "Me Abdoulaye Wade Stadium": {
       imageUrl: "/v-img/stade-abdoulaye-WADE.jpg",
@@ -125,6 +130,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
       tags: ["Stadium", "Football"],
       pointColor: "#1ABC9C",
       info: "National stadium for football and large events.",
+      info_fr: "Stade national pour le football et les grands événements.",
     },
     "Diamniadio Gendarmerie Equestrian Center": {
       imageUrl: "/v-img/centre-equestre.jpg",
@@ -133,6 +139,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
       tags: ["Equestrian", "Sports"],
       pointColor: "#8BC34A",
       info: "Equestrian training and competition facility.",
+      info_fr: "Centre d'entraînement et de compétition équestre.",
     },
 
     // ⭐ Matches your JSON "Diamniadio Exhibition Center"
@@ -157,6 +164,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
       socialHandle: "@jojdakar2026",
 
       info: "Centre des expositions de Diamniadio (Dakar Expo Center).",
+      info_fr: "Centre des expositions de Diamniadio (Dakar Expo Center).",
 
       sports: [
         // Material Design Icons set is broad and stable:
@@ -187,6 +195,7 @@ export const SITES_META: Record<string, Record<string, VenueMeta>> = {
       tags: ["Beach", "Family", "Surf"],
       pointColor: "#FF8C00",
       info: "Popular beach with water sports and food stalls.",
+      info_fr: "Plage populaire avec sports nautiques et stands de restauration.",
     },
   },
 };
