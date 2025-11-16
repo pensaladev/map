@@ -10,7 +10,7 @@ export function LogoBrand({ logoSrc = "/logo.jpeg" }: Props) {
       <img
         src={logoSrc}
         alt="Logo"
-        className="h-full w-24 rounded-md object-contain"
+        className="h-full w-16 sm:w-24 rounded-md object-contain"
         draggable={false}
       />
     </Link>

@@ -50,11 +50,11 @@ export function LanguageSwitcher({ value, onChange }: Props) {
     <button
       onClick={handleToggle}
       aria-label={currentButton.aria}
-      className="relative flex h-10 w-10 items-center justify-center rounded-full p-1 transition bg-emerald-100/80 ring-2 ring-emerald-500 shadow-sm"
+      className="relative flex h-8 w-8 items-center justify-center rounded-full p-1 transition bg-emerald-100/80 ring-2 ring-emerald-500 shadow-sm sm:h-10 sm:w-10"
       type="button"
     >
       <Icon icon={currentButton.icon} className="h-full w-full" />
-      <span className="pointer-events-none absolute -bottom-1 rounded-full px-1 text-[10px] font-semibold uppercase tracking-wide bg-emerald-500 text-white">
+      <span className="pointer-events-none absolute -bottom-1 rounded-full px-1 text-[9px] font-semibold uppercase tracking-wide bg-emerald-500 text-white sm:text-[10px]">
         {currentButton.label}
       </span>
     </button>

@@ -30,7 +30,7 @@ export function ProfileMenu() {
       {/* Profile Button -> opens AUTH modal */}
       <button
         onClick={handleProfileClick}
-        className="h-10 p-1 w-10 bg-gray-100 flex justify-center items-center rounded-full hover:bg-gray-200 transition"
+        className="h-8 w-8 bg-gray-100 flex justify-center items-center rounded-full hover:bg-gray-200 transition p-1 sm:h-10 sm:w-10"
         title="Profile"
       >
         <Icon icon="mdi:account-circle" className="h-full w-full" />

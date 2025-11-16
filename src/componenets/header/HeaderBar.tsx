@@ -15,14 +15,14 @@ export function HeaderBar({ onReset }: Props) {
     <div className="absolute top-0 left-0 right-0 z-30">
       <div className="mx-2 my-2">
         <div
-          className="flex items-center justify-between w-full max-w-[1200px] mx-auto
-                        backdrop-blur-sm bg-white/70 p-2 rounded-xl shadow-md"
+          className="flex items-center w-full max-w-[1200px] mx-auto gap-2 sm:gap-4
+                        backdrop-blur-sm bg-white/70 p-1.5 sm:p-2 rounded-xl shadow-md"
         >
           {/* left: logo */}
-          <div className="min-w-0">
+          <div className="min-w-0 shrink-0">
             <button
               onClick={onReset}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center w-16 sm:w-auto"
               aria-label="Logo action"
             >
               <LogoBrand logoSrc="/logo.jpeg" />
@@ -30,12 +30,12 @@ export function HeaderBar({ onReset }: Props) {
           </div>
 
           {/* center: title */}
-          <h1 className="text-base sm:text-lg font-semibold text-gray-900 text-center truncate px-2">
+          <h1 className="flex-1 min-w-0 px-1 text-sm font-semibold text-gray-900 text-center leading-tight whitespace-normal break-words sm:px-2 sm:text-lg sm:truncate">
             {t("title")}
           </h1>
 
           {/* right: flags + profile */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 shrink-0 sm:gap-3">
             <LanguageSwitcher />
             <ProfileMenu />
           </div>
