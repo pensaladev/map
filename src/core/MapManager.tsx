@@ -6,7 +6,7 @@ import { addDbCategoryPointsLayer } from "./layers/categoryPoints"; // ✅ gener
 import {
   MAPBOX_ACCESS_TOKEN,
   INITIAL_CENTER,
-  INITIAL_ZOOM,
+  getInitialZoom,
 } from "../utils/mapConfig";
 import type { RouteDetails, RouteSummary } from "./map/types";
 import { DUMMY_COORDS, USE_DUMMY_LOCATION } from "../config/map.constants";
@@ -143,7 +143,7 @@ export class MapManager {
       container,
       style: "mapbox://styles/mapbox/streets-v11",
       center: INITIAL_CENTER,
-      zoom: INITIAL_ZOOM,
+      zoom: getInitialZoom(),
     });
 
     // 🔎 Geocoder
@@ -346,7 +346,7 @@ export class MapManager {
   resetView() {
     if (!this.map) return;
     clearRoute(this.map);
-    this.map.flyTo({ center: INITIAL_CENTER, zoom: INITIAL_ZOOM });
+    this.map.flyTo({ center: INITIAL_CENTER, zoom: getInitialZoom() });
   }
 
   destroyMap() {

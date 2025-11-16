@@ -4,13 +4,14 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { MapManager } from "../../core/MapManager";
 import { Sidebar } from "../../componenets/Sidebar";
 import { HeaderBar } from "../../componenets/header/HeaderBar";
+import { getInitialZoom } from "../../utils/mapConfig";
 
 export default function MapPage() {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapManager = MapManager.getInstance();
   const [longitude, setLongitude] = useState(-74.0242);
   const [latitude, setLatitude] = useState(40.6941);
-  const [zoom, setZoom] = useState(10.12);
+  const [zoom, setZoom] = useState(() => getInitialZoom());
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
