@@ -33,6 +33,8 @@ export function LanguageSwitcher({ value, onChange }: Props) {
   const { i18n } = useTranslation();
   const activeLang =
     value ?? normalizeLang(i18n.resolvedLanguage ?? i18n.language);
+  const currentButton =
+    buttons.find(({ code }) => code === activeLang) ?? buttons[0];
 
   const handleSelect = (lang: Lang) => {
     if (normalizeLang(i18n.language) !== lang) {
@@ -41,33 +43,20 @@ export function LanguageSwitcher({ value, onChange }: Props) {
     onChange?.(lang);
   };
 
+  const handleToggle = () =>
+    handleSelect(activeLang === "fr" ? "en" : "fr");
+
   return (
-    <div className="flex items-center gap-2">
-      {buttons.map(({ code, icon, label, aria }) => {
-        const isActive = activeLang === code;
-        return (
-          <button
-            key={code}
-            onClick={() => handleSelect(code)}
-            aria-label={aria}
-            className={`relative flex h-10 w-10 items-center justify-center rounded-full p-1 transition ${
-              isActive
-                ? "bg-emerald-100/80 ring-2 ring-emerald-500 shadow-sm"
-                : "bg-gray-100 hover:bg-gray-200"
-            }`}
-            type="button"
-          >
-            <Icon icon={icon} className="h-full w-full" />
-            <span
-              className={`pointer-events-none absolute -bottom-1 rounded-full px-1 text-[10px] font-semibold uppercase tracking-wide ${
-                isActive ? "bg-emerald-500 text-white" : "bg-white/80 text-gray-600"
-              }`}
-            >
-              {label}
-            </span>
-          </button>
-        );
-      })}
-    </div>
+    <button
+      onClick={handleToggle}
+      aria-label={currentButton.aria}
+      className="relative flex h-10 w-10 items-center justify-center rounded-full p-1 transition bg-emerald-100/80 ring-2 ring-emerald-500 shadow-sm"
+      type="button"
+    >
+      <Icon icon={currentButton.icon} className="h-full w-full" />
+      <span className="pointer-events-none absolute -bottom-1 rounded-full px-1 text-[10px] font-semibold uppercase tracking-wide bg-emerald-500 text-white">
+        {currentButton.label}
+      </span>
+    </button>
   );
 }
