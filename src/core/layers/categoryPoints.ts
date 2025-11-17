@@ -1,7 +1,7 @@
 // src/core/layers/categoryPoints.ts
 import mapboxgl, { Map } from "mapbox-gl";
 import { addOrSetSource } from "../map/utils";
-import { renderVenuePopup } from "../../componenets/popupRenderer";
+import { destroyPopup, renderVenuePopup } from "../../componenets/popupRenderer";
 import {
   collection,
   getDocs,
@@ -243,6 +243,7 @@ async function getZonePlacesFeatures(zoneId: string, zoneName: string) {
           id: d.id,
           title: p.name ?? "Untitled",
           info: p.info ?? "",
+          info_fr: p.info_fr ?? p.infoFr ?? "",
           address: p.address ?? "",
           rating: typeof p.rating === "number" ? p.rating : null,
           tags: parseStringArray(p.tags),
@@ -291,6 +292,7 @@ async function getUnassignedFeatures(categoryId: string) {
           id: d.id,
           title: p.name ?? "Untitled",
           info: p.info ?? "",
+          info_fr: p.info_fr ?? p.infoFr ?? "",
           address: p.address ?? "",
           rating: typeof p.rating === "number" ? p.rating : null,
           tags: parseStringArray(p.tags),
@@ -604,6 +606,7 @@ async function addClusterLayers(
     });
     map.easeTo({ center: coords, zoom: Math.max(map.getZoom(), 15) });
     popup.setLngLat(coords).setDOMContent(node).addTo(map);
+    popup.once("close", () => destroyPopup(node));
   });
 
   map.on(

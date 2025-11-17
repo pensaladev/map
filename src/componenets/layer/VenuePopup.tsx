@@ -104,6 +104,8 @@ function normTags(v?: string[] | string): string[] {
   return [];
 }
 
+const deriveLangCode = (lng?: string) => (lng ?? "en").split("-")[0] || "en";
+
 export const VenuePopup: React.FC<VenuePopupProps> = ({
   title,
   zone,
@@ -128,6 +130,9 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   socialHandle,
 }) => {
   const { t, i18n } = useTranslation();
+  const [langCode, setLangCode] = useState(() =>
+    deriveLangCode(i18n.resolvedLanguage || i18n.language),
+  );
   const [route, setRoute] = useState<{
     distance: number;
     duration: number;
@@ -221,10 +226,19 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
   const catMeta = CATEGORY_ICON[catKey];
 
   const langRaw = i18n.resolvedLanguage || i18n.language || "en";
-  const langCode = (langRaw ?? "en").split("-")[0] || "en";
   const activeInfoLang = infoOverride ?? langCode;
   const infoLocalized =
     activeInfoLang === "fr" ? (infoFr ?? "").trim() || info : info;
+
+  useEffect(() => {
+    const handleLangChange = (lng: string) => {
+      setLangCode(deriveLangCode(lng));
+    };
+    i18n.on("languageChanged", handleLangChange);
+    return () => {
+      i18n.off("languageChanged", handleLangChange);
+    };
+  }, [i18n]);
 
   useEffect(() => {
     setInfoOverride(null);

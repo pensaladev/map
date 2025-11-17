@@ -1,7 +1,7 @@
 // src/core/layers/competitionSites.ts
 import mapboxgl, { Map as MapboxMap } from "mapbox-gl";
 import { addOrSetSource } from "../map/utils";
-import { renderVenuePopup } from "../../componenets/popupRenderer";
+import { destroyPopup, renderVenuePopup } from "../../componenets/popupRenderer";
 import {
   getZonesForCategory,
   getZoneFeatureCollection,
@@ -166,6 +166,7 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
         });
 
         sharedPopup.setLngLat(coords).setDOMContent(node).addTo(map);
+        sharedPopup.once("close", () => destroyPopup(node));
       });
 
       map.on("mouseenter", layerId, () => {
