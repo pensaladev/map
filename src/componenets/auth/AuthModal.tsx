@@ -72,7 +72,7 @@ export function AuthModal({
           {/* Top logo (in flow, not absolute) */}
           <div className="flex justify-center p-4 sm:p-5 shrink-0">
             <img
-              src="/logo_secondary.jpeg"
+              src="/logo.jpeg"
               alt="Brand"
               className="h-20 sm:h-40 object-contain"
             />
