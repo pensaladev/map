@@ -110,7 +110,7 @@ const CategoryVenueCard: React.FC<Props> = ({
   }
 
   return (
-    <div className="w-[92vw] sm:w-[340px] shadow-xl border border-gray-300/80 bg-white overflow-hidden rounded-md">
+    <div className="w-[86vw] max-w-[320px] sm:w-[340px] shadow-xl border border-gray-300/80 bg-white overflow-hidden rounded-md">
       {/* Optional hero image */}
       {imageUrl ? (
         <div className="relative">
@@ -131,18 +131,18 @@ const CategoryVenueCard: React.FC<Props> = ({
 
       {/* Header: icon + zone tag */}
       <div
-        className="px-3 py-3 text-white flex items-center justify-between"
+        className="px-3 py-2.5 sm:py-3 text-white flex items-center justify-between"
         style={{ background: `linear-gradient(135deg, ${color}, #111827)` }}
       >
         <div className="flex items-center gap-3">
-          <span className="grid place-items-center rounded-lg bg-white/15 p-2">
-            <Icon icon={icon} className="w-6 h-6 text-white" />
+          <span className="grid place-items-center rounded-lg bg-white/15 p-1.5 sm:p-2">
+            <Icon icon={icon} className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </span>
           <div className="leading-tight">
             <div className="text-[10px] uppercase opacity-90 tracking-wide">
               {zone === "Unassigned" ? "" : zone}
             </div>
-            <div className="text-lg font-semibold">{title}</div>
+            <div className="text-base sm:text-lg font-semibold">{title}</div>
           </div>
         </div>
 
@@ -158,7 +158,7 @@ const CategoryVenueCard: React.FC<Props> = ({
       </div>
 
       {/* Body */}
-      <div className="p-3 text-sm text-gray-800">
+      <div className="p-2.5 sm:p-3 text-[12.5px] sm:text-sm text-gray-800">
         {infoText && <p className="mb-1">{infoText}</p>}
         {address && <p className="text-xs text-gray-500">{address}</p>}
 
@@ -266,14 +266,14 @@ const CategoryVenueCard: React.FC<Props> = ({
         <div className="mt-3 flex gap-2">
           <button
             onClick={handleGetDirections}
-            className="flex-1 bg-black text-white rounded-3xl hover:opacity-90 font-semibold text-sm px-3 py-1.5 transition"
+            className="flex-1 bg-black text-white rounded-3xl hover:opacity-90 font-semibold text-[13px] sm:text-sm px-3 py-1.5 transition"
           >
             {t("layer.actions.getDirections")}
           </button>
           {route && (
             <button
               onClick={onClear}
-              className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-sm px-4 w-fit py-1.5 transition"
+              className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-[13px] sm:text-sm px-4 w-fit py-1.5 transition"
             >
               {t("layer.actions.clearRoute")}
             </button>

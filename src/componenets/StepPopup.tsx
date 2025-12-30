@@ -39,29 +39,29 @@ export function StepPopup({
   maneuver,
 }: StepPopupProps) {
   return (
-    <div className="w-[240px] rounded-xl border border-gray-200 bg-white/80 backdrop-blur p-3 shadow-lg">
+    <div className="w-[190px] sm:w-[240px] rounded-xl border border-gray-200 bg-white/80 backdrop-blur p-2 sm:p-3 shadow-lg">
       <div className="flex flex-col items-start gap-2">
         <div className="shrink-0 mt-0.5">
-          <div className="w-10 h-10 rounded-full bg-emerald-500/15 grid place-items-center">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/15 grid place-items-center">
             {/* <span className="text-xs font-bold text-emerald-600">→</span> */}
             <ManeuverIcon
               type={maneuver?.type}
               modifier={maneuver?.modifier}
               exit={maneuver?.exit}
-              className="w-4 h-4 text-emerald-700"
+              className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700"
             />
           </div>
         </div>
         <div className="flex-1">
-          <div className="text-sm font-semibold text-gray-900 leading-snug">
+          <div className="text-[12px] sm:text-sm font-semibold text-gray-900 leading-snug">
             {instruction}
           </div>
           {name && (
-            <div className="text-xs text-gray-600 mt-0.5">
+            <div className="text-[10.5px] sm:text-xs text-gray-600 mt-0.5">
               Road: <span className="font-medium">{name}</span>
             </div>
           )}
-          <div className="mt-2 flex items-center justify-between text-xs">
+          <div className="mt-2 flex items-center justify-between text-[10.5px] sm:text-xs">
             <div className="text-gray-700">
               <span className="font-medium">{fmtKm(distance)}</span>
               <span className="mx-1.5 text-gray-400">•</span>

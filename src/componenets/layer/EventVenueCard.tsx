@@ -110,7 +110,7 @@ const EventVenueCard: React.FC<Props> = ({
 
   return (
     <div
-      className="w-[350px] sm:w-[450px] shadow-xl rounded-3xl border border-gray-300/80 bg-white overflow-hidden p-3"
+      className="w-[82vw] max-w-[320px] sm:w-[450px] sm:max-w-none shadow-xl rounded-3xl border border-gray-300/80 bg-white overflow-hidden p-2 sm:p-3"
       style={{
         fontFamily: "Inter, sans-serif",
         background: `linear-gradient(135deg, ${g0}, ${g1})`,
@@ -139,7 +139,7 @@ const EventVenueCard: React.FC<Props> = ({
           )}
         </div>
 
-        <h3 className="mt-2 text-2xl py-3 font-extrabold uppercase text-center tracking-wide">
+        <h3 className="mt-2 text-lg sm:text-2xl py-2 sm:py-3 font-extrabold uppercase text-center tracking-wide">
           {title}
         </h3>
 
@@ -154,7 +154,7 @@ const EventVenueCard: React.FC<Props> = ({
       <img
         src={imageUrl ?? "/v-img/default.jpg"}
         alt={title}
-        className="w-full h-44 sm:h-52 object-cover my-1 rounded-3xl border-6 border-white"
+        className="w-full h-36 sm:h-52 object-cover my-1 rounded-3xl border-6 border-white"
       />
 
       {/* Sports strip */}
@@ -186,11 +186,13 @@ const EventVenueCard: React.FC<Props> = ({
 
       {/* Body */}
       <div className=" text-gray-900">
-        <p className="text-xs leading-snug text-white">{infoText}</p>
-        <p className="text-sm mt-1 text-gray-300">{address}</p>
+        <p className="text-[11px] sm:text-xs leading-snug text-white">
+          {infoText}
+        </p>
+        <p className="text-[12px] sm:text-sm mt-1 text-gray-300">{address}</p>
 
         {route && (
-          <div className="mt-2 text-xs text-gray-800 bg-white/85 rounded px-2 py-1 shadow-sm">
+          <div className="mt-2 text-[11px] sm:text-xs text-gray-800 bg-white/85 rounded px-2 py-1 shadow-sm">
             <div className="flex flex-wrap gap-3">
               <div>
                 <strong>{t("layer.route.distanceLabel")}:</strong>{" "}
@@ -207,8 +209,8 @@ const EventVenueCard: React.FC<Props> = ({
               id={routePanelId}
               className="
                 mt-1 space-y-1 overflow-y-auto
-                max-h-32 sm:max-h-48      /* ~10rem mobile, ~14rem desktop */
-                pr-1                       /* space for scrollbar */
+                max-h-24 sm:max-h-48      /* tighter mobile, roomy desktop */
+                pr-1
               "
             >
               {visibleSteps.map((s, i) => (
@@ -221,7 +223,7 @@ const EventVenueCard: React.FC<Props> = ({
                       className="w-3.5 h-3.5 text-emerald-700"
                     />
                   </span>
-                  <span className="text-[12.5px] leading-snug">
+                  <span className="text-[11.5px] sm:text-[12.5px] leading-snug">
                     {s.instruction}{" "}
                     <span className="text-gray-500">
                       ({(s.distance / 1000).toFixed(1)}{" "}
@@ -251,7 +253,7 @@ const EventVenueCard: React.FC<Props> = ({
         <div className="mt-3 flex gap-2">
           <button
             onClick={onGetDirections}
-            className="flex-1 bg-white rounded-3xl hover:bg-blue-100 font-semibold text-sm px-3 py-1.5 transition duration-300"
+            className="flex-1 bg-white rounded-3xl hover:bg-blue-100 font-semibold text-[12.5px] sm:text-sm px-3 py-1.5 transition duration-300"
             style={{ color: `${g1}` }}
           >
             {t("layer.actions.getDirections")}
@@ -259,7 +261,7 @@ const EventVenueCard: React.FC<Props> = ({
           {route && (
             <button
               onClick={onClear}
-              className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-sm px-4 w-fit py-1.5 transition"
+              className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-[12.5px] sm:text-sm px-3.5 w-fit py-1.5 transition"
               style={{ color: `${g1}` }}
             >
               {t("layer.actions.clearRoute")}

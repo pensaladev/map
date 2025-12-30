@@ -54,7 +54,7 @@ const DefaultVenueCard: React.FC<Props> = ({
 
   return (
     <div
-      className="w-[350px] rounded-2xl shadow-xl border border-gray-300/80 backdrop-blur-lg bg-white/80"
+      className="w-[86vw] max-w-[300px] sm:w-[350px] rounded-2xl shadow-xl border border-gray-300/80 backdrop-blur-lg bg-white/80"
       style={{
         fontFamily: "Inter, sans-serif",
         border: "1px solid rgba(200, 200, 200, 0.5)",
@@ -65,27 +65,29 @@ const DefaultVenueCard: React.FC<Props> = ({
         <img
           src={imageUrl}
           alt={title}
-          className="w-full h-36 object-cover rounded-t-2xl"
+          className="w-full h-28 sm:h-36 object-cover rounded-t-2xl"
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-          <h3 className="text-white text-lg font-semibold leading-tight">
+          <h3 className="text-white text-[15px] sm:text-lg font-semibold leading-tight">
             {title}
           </h3>
         </div>
       </div>
 
-      <div className="p-4 text-gray-900">
+      <div className="p-2.5 sm:p-4 text-gray-900 text-[12.5px] sm:text-sm">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-[12.5px] sm:text-sm font-medium text-gray-700">
             <strong>{t("layer.default.zoneLabel")}:</strong> {zone}
           </span>
-          <span className="text-sm bg-yellow-400 text-black px-2 py-0.5 rounded-full">
+          <span className="text-[11px] sm:text-sm bg-yellow-400 text-black px-2 py-0.5 rounded-full">
             ⭐ {rating.toFixed(1)}
           </span>
         </div>
 
-        <p className="text-sm text-gray-800 leading-snug mb-2">{infoText}</p>
-        <p className="text-xs text-gray-600 mb-2">
+        <p className="text-[12.5px] sm:text-sm text-gray-800 leading-snug mb-2">
+          {infoText}
+        </p>
+        <p className="text-[11.5px] sm:text-xs text-gray-600 mb-2">
           <strong>{t("layer.default.addressLabel")}:</strong> {address}
         </p>
 
@@ -147,14 +149,14 @@ const DefaultVenueCard: React.FC<Props> = ({
 
         <button
           onClick={onGetDirections}
-          className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1.5 rounded-3xl transition"
+          className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white text-[12.5px] sm:text-sm px-3 py-1.5 rounded-3xl transition"
         >
           {t("layer.actions.getDirections")}
         </button>
         {route && (
           <button
             onClick={onClear}
-            className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-sm px-4 w-fit py-1.5 transition"
+            className="flex-.5 rounded-3xl bg-white hover:bg-gray-100 font-semibold text-[12.5px] sm:text-sm px-3.5 w-fit py-1.5 transition"
           >
             {t("layer.actions.clearRoute")}
           </button>
