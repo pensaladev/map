@@ -6,6 +6,7 @@ import {
   getZonesForCategory,
   getZoneFeatureCollection,
 } from "../../data/firestore/firestorePlaces";
+import { keepPopupInView } from "./popupUtils";
 import type { VenueSport } from "../../data/sitesMeta"; // ✅ add this
 
 const sharedPopup = new mapboxgl.Popup({
@@ -173,6 +174,7 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
         });
 
         sharedPopup.setLngLat(coords).setDOMContent(node).addTo(map);
+        keepPopupInView(map, sharedPopup);
         sharedPopup.once("close", () => destroyPopup(node));
       });
 

@@ -53,6 +53,7 @@ const CategoryVenueCard: React.FC<Props> = ({
   const { t, i18n } = useTranslation();
   const lang = i18n.resolvedLanguage || i18n.language || "en";
   const infoText = lang.startsWith("fr") ? infoFr.trim() || info : info;
+  const [infoExpanded, setInfoExpanded] = useState(false);
 
   const visibleSteps = route
     ? expanded
@@ -159,7 +160,32 @@ const CategoryVenueCard: React.FC<Props> = ({
 
       {/* Body */}
       <div className="p-2.5 sm:p-3 text-[12.5px] sm:text-sm text-gray-800">
-        {infoText && <p className="mb-1">{infoText}</p>}
+        {infoText && (
+          <>
+            <p
+              className="mb-1"
+              style={
+                infoExpanded
+                  ? undefined
+                  : {
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }
+              }
+            >
+              {infoText}
+            </p>
+            <button
+              type="button"
+              onClick={() => setInfoExpanded((v) => !v)}
+              className="mb-2 text-[11px] font-semibold text-blue-700 hover:text-blue-800"
+            >
+              {infoExpanded ? "See less" : "See more"}
+            </button>
+          </>
+        )}
         {address && <p className="text-xs text-gray-500">{address}</p>}
 
         {/* Extra place facts */}

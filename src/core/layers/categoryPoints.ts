@@ -2,6 +2,7 @@
 import mapboxgl, { Map } from "mapbox-gl";
 import { addOrSetSource } from "../map/utils";
 import { destroyPopup, renderVenuePopup } from "../../componenets/popupRenderer";
+import { keepPopupInView } from "./popupUtils";
 import {
   collection,
   getDocs,
@@ -615,6 +616,7 @@ async function addClusterLayers(
     });
     map.easeTo({ center: coords, zoom: Math.max(map.getZoom(), 15) });
     popup.setLngLat(coords).setDOMContent(node).addTo(map);
+    keepPopupInView(map, popup);
     popup.once("close", () => destroyPopup(node));
   });
 
