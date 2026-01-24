@@ -51,6 +51,7 @@ export default function AddPlaceFull() {
 
   // base fields
   const [name, setName] = useState("");
+  const [nameFr, setNameFr] = useState("");
   const [lat, setLat] = useState<number | "">("");
   const [lng, setLng] = useState<number | "">("");
   const [address, setAddress] = useState("");
@@ -275,6 +276,7 @@ export default function AddPlaceFull() {
       const colRef = placesCollectionRef(zoneId);
       const docRef = await addDoc(colRef, {
         name,
+        name_fr: nameFr || null,
         location: new GeoPoint(Number(lat), Number(lng)),
         address: address || null,
         info: info || null,
@@ -311,6 +313,7 @@ export default function AddPlaceFull() {
 
       // reset form
       setName("");
+      setNameFr("");
       setLat("");
       setLng("");
       setAddress("");
@@ -406,6 +409,8 @@ export default function AddPlaceFull() {
           <BasicDetailsFields
             name={name}
             setName={setName}
+            nameFr={nameFr}
+            setNameFr={setNameFr}
             lat={lat}
             setLat={setLat}
             lng={lng}
@@ -477,6 +482,7 @@ export default function AddPlaceFull() {
               type="button"
               onClick={() => {
                 setName("");
+                setNameFr("");
                 setLat("");
                 setLng("");
                 setAddress("");
@@ -526,6 +532,7 @@ export default function AddPlaceFull() {
                 locationLabel={locationLabel}
                 shortCode={shortCode}
                 name={name}
+                nameFr={nameFr}
                 info={info}
                 infoFr={infoFr}
                 address={address}

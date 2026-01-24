@@ -103,6 +103,11 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
           (props["Name"] as string) ||
           (props["Nom"] as string) ||
           "Unknown Venue";
+        const titleFr =
+          (props["title_fr"] as string) ||
+          (props["name_fr"] as string) ||
+          (props["nameFr"] as string) ||
+          "";
 
         const info =
           (props["info"] as string) || (props["description"] as string) || "";
@@ -110,6 +115,7 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
           (props["info_fr"] as string) || (props["infoFr"] as string) || "";
         console.log("[competitionSites] popup info", {
           title,
+          titleFr,
           info,
           infoFr,
           props,
@@ -140,6 +146,7 @@ export async function addCompetitionSitesLayer(map: MapboxMap) {
 
         const node = renderVenuePopup({
           title,
+          titleFr,
           zone: z.name,
           info,
           infoFr,

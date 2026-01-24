@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 
 export interface VenuePopupProps {
   title: string;
+  titleFr?: string;
   zone: string;
   info: string;
   infoFr?: string;
@@ -108,10 +109,11 @@ const deriveLangCode = (lng?: string) => (lng ?? "en").split("-")[0] || "en";
 
 export const VenuePopup: React.FC<VenuePopupProps> = ({
   title,
+  titleFr,
   zone,
   info,
   infoFr,
-  imageUrl = "https://picsum.photos/300/200",
+  imageUrl,
   address,
   rating = 4.5,
   tags,
@@ -227,6 +229,8 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
 
   const langRaw = i18n.resolvedLanguage || i18n.language || "en";
   const activeInfoLang = infoOverride ?? langCode;
+  const titleLocalized =
+    activeInfoLang === "fr" ? (titleFr ?? "").trim() || title : title;
   const infoLocalized =
     activeInfoLang === "fr" ? (infoFr ?? "").trim() || info : info;
 
@@ -248,6 +252,8 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
     // Debug payload from backend to verify translations
     console.log("[VenuePopup] info payload", {
       title,
+      titleFr,
+      titleLocalized,
       langRaw,
       langCode,
       info,
@@ -256,7 +262,18 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
       activeInfoLang,
       infoLocalized,
     });
-  }, [title, langRaw, langCode, info, infoFr, infoOverride, activeInfoLang, infoLocalized]);
+  }, [
+    title,
+    titleFr,
+    titleLocalized,
+    langRaw,
+    langCode,
+    info,
+    infoFr,
+    infoOverride,
+    activeInfoLang,
+    infoLocalized,
+  ]);
 
   const hasSports = Array.isArray(sports)
     ? sports.length > 0
@@ -270,10 +287,11 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
       return (
         <CategoryVenueCard
           key={`category-${activeInfoLang}`}
-          title={title}
+          title={titleLocalized}
           zone={zone}
           info={infoLocalized}
           infoFr={infoFr}
+          imageUrl={imageUrl}
           address={resolvedAddress}
           tags={tagsArr}
           icon={catMeta.icon}
@@ -290,7 +308,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
       return (
         <EventVenueCard
           key={`event-${activeInfoLang}`}
-          title={title}
+          title={titleLocalized}
           info={infoLocalized}
           infoFr={infoFr}
           imageUrl={imageUrl}
@@ -316,7 +334,7 @@ export const VenuePopup: React.FC<VenuePopupProps> = ({
     return (
       <DefaultVenueCard
         key={`default-${activeInfoLang}`}
-        title={title}
+        title={titleLocalized}
         zone={zone}
         info={infoLocalized}
         infoFr={infoFr}

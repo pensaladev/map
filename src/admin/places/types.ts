@@ -22,6 +22,7 @@ export interface Zone {
 export interface Place {
   id: string;
   name: string;
+  name_fr?: string;
   location: GeoPoint;
   address?: string;
   info?: string;

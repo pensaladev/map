@@ -18,6 +18,7 @@ type Props = {
 
   // content
   name: string;
+  nameFr?: string;
   info: string;
   infoFr?: string;
   address: string;
@@ -52,6 +53,7 @@ export default function PlacePreview({
   locationLabel,
   shortCode,
   name,
+  nameFr,
   info,
   infoFr,
   address,
@@ -68,6 +70,9 @@ export default function PlacePreview({
   const infoText = activeLang.startsWith("fr")
     ? (infoFr ?? "").trim() || info
     : info;
+  const nameText = activeLang.startsWith("fr")
+    ? (nameFr ?? "").trim() || name
+    : name;
   const [g0, g1] = normGradient(gradientFrom, gradientTo);
   const sportCount =
     categoryId === "competition"
@@ -106,7 +111,7 @@ export default function PlacePreview({
         </div>
 
         <h3 className="mt-2 text-2xl py-3 font-extrabold uppercase text-center tracking-wide">
-          {name || "EGG TOWER COMPLEX"}
+          {nameText || "EGG TOWER COMPLEX"}
         </h3>
 
         {(shortCode || sportCount) && (
@@ -120,7 +125,7 @@ export default function PlacePreview({
       {/* Hero image */}
       <img
         src={preview ?? "/v-img/default.jpg"}
-        alt={name || "cover"}
+        alt={nameText || "cover"}
         className="w-full h-44 object-cover border-6 border-white"
       />
 

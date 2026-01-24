@@ -242,6 +242,7 @@ async function getZonePlacesFeatures(zoneId: string, zoneName: string) {
           __source: "firestore",
           id: d.id,
           title: p.name ?? "Untitled",
+          title_fr: p.name_fr ?? p.nameFr ?? "",
           info: p.info ?? "",
           info_fr: p.info_fr ?? p.infoFr ?? "",
           address: p.address ?? "",
@@ -291,6 +292,7 @@ async function getUnassignedFeatures(categoryId: string) {
           __source: "firestore",
           id: d.id,
           title: p.name ?? "Untitled",
+          title_fr: p.name_fr ?? p.nameFr ?? "",
           info: p.info ?? "",
           info_fr: p.info_fr ?? p.infoFr ?? "",
           address: p.address ?? "",
@@ -567,6 +569,11 @@ async function addClusterLayers(
     const coords = (f.geometry as any).coordinates as [number, number];
     const p = (f.properties || {}) as Record<string, any>;
     const title = (p["title"] as string) || (p["Name"] as string) || "Untitled";
+    const titleFr =
+      (p["title_fr"] as string) ||
+      (p["name_fr"] as string) ||
+      (p["nameFr"] as string) ||
+      "";
     const gradient = gradientFromProps(p);
     const sports = parseArray<VenueSport>(p["sports"]) ?? [];
     const infoEn = (p["info"] as string) || "";
@@ -574,12 +581,14 @@ async function addClusterLayers(
       (p["info_fr"] as string) || (p["infoFr"] as string) || "";
     console.log("[categoryPoints] popup info", {
       title,
+      titleFr,
       infoEn,
       infoFr,
       props: p,
     });
     const node = renderVenuePopup({
       title,
+      titleFr,
       zone: p["zoneName"] || categoryId,
       categoryId: p["categoryId"] || categoryId,
       info: infoEn,

@@ -61,7 +61,9 @@ function buildProps(
     // Map card basics
     id: p.id || null,
     title: p.name ?? "Untitled",
+    title_fr: p.name_fr ?? p.nameFr ?? null,
     Name: p.name ?? "Untitled", // legacy compatibility (PlacesList uses `Name`)
+    name_fr: p.name_fr ?? p.nameFr ?? null,
     address: p.address ?? null,
     info: p.info ?? null,
     info_fr: p.info_fr ?? p.infoFr ?? null,

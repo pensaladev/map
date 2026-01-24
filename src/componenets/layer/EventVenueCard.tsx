@@ -151,11 +151,13 @@ const EventVenueCard: React.FC<Props> = ({
       </div>
 
       {/* Hero image */}
-      <img
-        src={imageUrl ?? "/v-img/default.jpg"}
-        alt={title}
-        className="w-full h-36 sm:h-52 object-cover my-1 rounded-3xl border-6 border-white"
-      />
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-full h-36 sm:h-52 object-cover my-1 rounded-3xl border-6 border-white"
+        />
+      ) : null}
 
       {/* Sports strip */}
       {sports?.length ? (

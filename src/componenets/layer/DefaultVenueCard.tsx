@@ -22,7 +22,7 @@ type Props = {
   zone: string;
   info: string;
   infoFr?: string;
-  imageUrl: string;
+  imageUrl?: string;
   address: string;
   rating: number;
   tags: string[];
@@ -61,18 +61,26 @@ const DefaultVenueCard: React.FC<Props> = ({
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
       }}
     >
-      <div className="relative">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="w-full h-28 sm:h-36 object-cover rounded-t-2xl"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-          <h3 className="text-white text-[15px] sm:text-lg font-semibold leading-tight">
+      {imageUrl ? (
+        <div className="relative">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-28 sm:h-36 object-cover rounded-t-2xl"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+            <h3 className="text-white text-[15px] sm:text-lg font-semibold leading-tight">
+              {title}
+            </h3>
+          </div>
+        </div>
+      ) : (
+        <div className="px-2.5 sm:px-4 pt-3">
+          <h3 className="text-[15px] sm:text-lg font-semibold leading-tight text-gray-900">
             {title}
           </h3>
         </div>
-      </div>
+      )}
 
       <div className="p-2.5 sm:p-4 text-gray-900 text-[12.5px] sm:text-sm">
         <div className="flex justify-between items-center mb-2">

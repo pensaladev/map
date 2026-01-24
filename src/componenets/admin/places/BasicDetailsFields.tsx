@@ -13,6 +13,8 @@ import LocationPickerButton from "../../../core/map/LocationPickerButton";
 type Props = {
   name: string;
   setName: (v: string) => void;
+  nameFr: string;
+  setNameFr: (v: string) => void;
   lat: number | "";
   setLat: (v: number | "") => void;
   lng: number | "";
@@ -44,6 +46,8 @@ export default function BasicDetailsFields(props: Props) {
   const {
     name,
     setName,
+    nameFr,
+    setNameFr,
     lat,
     setLat,
     lng,
@@ -83,6 +87,16 @@ export default function BasicDetailsFields(props: Props) {
               placeholder="e.g. Iba Mar Diop Stadium"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+          </Field>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-1">
+          <Field id="nameFr" label="Place name (French)">
+            <TextInput
+              id="nameFr"
+              placeholder="Nom en français…"
+              value={nameFr}
+              onChange={(e) => setNameFr(e.target.value)}
             />
           </Field>
         </div>

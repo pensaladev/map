@@ -167,6 +167,8 @@ function uniqSports(list: VenueSport[]): VenueSport[] {
 export type Place = {
   id: string;
   name: string;
+  name_fr?: string | null;
+  nameFr?: string | null;
   location?: { latitude: number; longitude: number } | any;
   address?: string;
   info?: string;
@@ -210,6 +212,7 @@ export function PlaceDetailsPage() {
 
   // core fields
   const [name, setName] = useState("");
+  const [nameFr, setNameFr] = useState("");
   const [lat, setLat] = useState<number | "">("");
   const [lng, setLng] = useState<number | "">("");
   const [address, setAddress] = useState("");
@@ -267,6 +270,7 @@ export function PlaceDetailsPage() {
         setZoneIdInDoc(d.zoneId ?? (isRoot(zoneParam) ? null : zoneParam!));
 
         setName(d.name || "");
+        setNameFr(d.name_fr || (d as any).name_fr || (d as any).nameFr || "");
         const la = d.location?.latitude ?? (d as any).location?._lat ?? null;
         const lo = d.location?.longitude ?? (d as any).location?._long ?? null;
         setLat(la ?? "");
@@ -355,6 +359,7 @@ export function PlaceDetailsPage() {
 
       await updateDoc(docRefFor(zoneParam, placeId), {
         name,
+        name_fr: nameFr || null,
         location: new GeoPoint(Number(lat), Number(lng)),
         address: address || null,
         info: info || null,
@@ -482,7 +487,7 @@ export function PlaceDetailsPage() {
         <div className="lg:col-span-8 space-y-6">
           {/* Basic */}
           <Section title="Basic details">
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2">
               <Field id="name" label="Place name" required>
                 <TextInput
                   id="name"
@@ -491,6 +496,16 @@ export function PlaceDetailsPage() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </Field>
+              <Field id="nameFr" label="Place name (French)">
+                <TextInput
+                  id="nameFr"
+                  placeholder="Nom en français…"
+                  value={nameFr}
+                  onChange={(e) => setNameFr(e.target.value)}
+                />
+              </Field>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
               <Field id="lat" label="Latitude" required>
                 <TextInput
                   id="lat"
@@ -809,6 +824,7 @@ export function PlaceDetailsPage() {
                 locationLabel={locationLabel}
                 shortCode={shortCode}
                 name={name}
+                nameFr={nameFr}
                 info={info}
                 infoFr={infoFr}
                 address={address}
