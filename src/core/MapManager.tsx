@@ -320,9 +320,47 @@ export class MapManager {
     }
   }
 
+  private validateCoord(label: string, coord: [number, number]) {
+    const [lng, lat] = coord;
+    if (!Number.isFinite(lng) || !Number.isFinite(lat)) {
+      throw new Error(`Invalid coordinates for ${label}`);
+    }
+    if (Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+      throw new Error(`Invalid coordinates for ${label}`);
+    }
+    if (Math.abs(lat) < 0.0001 && Math.abs(lng) < 0.0001) {
+      throw new Error(`Invalid coordinates for ${label}`);
+    }
+  }
+
+  private haversineKm(a: [number, number], b: [number, number]) {
+    const [lng1, lat1] = a;
+    const [lng2, lat2] = b;
+    const toRad = (d: number) => (d * Math.PI) / 180;
+    const R = 6371; // km
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const s1 = Math.sin(dLat / 2);
+    const s2 = Math.sin(dLng / 2);
+    const q =
+      s1 * s1 +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * s2 * s2;
+    return 2 * R * Math.asin(Math.min(1, Math.sqrt(q)));
+  }
+
   async showRouteToVenue(from: [number, number] | null, to: [number, number]) {
     if (!this.map) return;
     const origin = from && !USE_DUMMY_LOCATION ? from : DUMMY_COORDS;
+    this.validateCoord("origin", origin);
+    this.validateCoord("destination", to);
+
+    const distKm = this.haversineKm(origin, to);
+    if (distKm > 1200) {
+      throw new Error(
+        `Route too far for directions (${distKm.toFixed(0)} km).`,
+      );
+    }
+
     const details = await drawRoute(this.map, origin, to);
     this.lastRouteDetails = details;
     this.lastRouteSummary = {
