@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ManeuverIcon } from "../maneuverIcons";
 import { useTranslation } from "react-i18next";
 
@@ -51,6 +51,7 @@ const DefaultVenueCard: React.FC<Props> = ({
   const infoText = lang.startsWith("fr")
     ? (infoFr ?? "").trim() || info
     : info;
+  const [infoExpanded, setInfoExpanded] = useState(false);
 
   return (
     <div
@@ -92,9 +93,30 @@ const DefaultVenueCard: React.FC<Props> = ({
           </span>
         </div>
 
-        <p className="text-[12.5px] sm:text-sm text-gray-800 leading-snug mb-2">
+        <p
+          className="text-[12.5px] sm:text-sm text-gray-800 leading-snug mb-1"
+          style={
+            infoExpanded
+              ? undefined
+              : {
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                }
+          }
+        >
           {infoText}
         </p>
+        {infoText && (
+          <button
+            type="button"
+            onClick={() => setInfoExpanded((v) => !v)}
+            className="mb-2 text-[11.5px] sm:text-xs font-semibold text-blue-700 hover:text-blue-800"
+          >
+            {infoExpanded ? "See less" : "See more"}
+          </button>
+        )}
         <p className="text-[11.5px] sm:text-xs text-gray-600 mb-2">
           <strong>{t("layer.default.addressLabel")}:</strong> {address}
         </p>

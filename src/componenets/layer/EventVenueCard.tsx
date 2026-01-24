@@ -77,6 +77,7 @@ const EventVenueCard: React.FC<Props> = ({
   const { t, i18n } = useTranslation();
   const lang = i18n.resolvedLanguage || i18n.language || "en";
   const infoText = lang.startsWith("fr") ? (infoFr ?? "").trim() || info : info;
+  const [infoExpanded, setInfoExpanded] = useState(false);
 
   useEffect(() => {
     console.log("[EventVenueCard] info props", {
@@ -188,9 +189,30 @@ const EventVenueCard: React.FC<Props> = ({
 
       {/* Body */}
       <div className=" text-gray-900">
-        <p className="text-[11px] sm:text-xs leading-snug text-white">
+        <p
+          className="text-[11px] sm:text-xs leading-snug text-white"
+          style={
+            infoExpanded
+              ? undefined
+              : {
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                }
+          }
+        >
           {infoText}
         </p>
+        {infoText && (
+          <button
+            type="button"
+            onClick={() => setInfoExpanded((v) => !v)}
+            className="mt-1 text-[10px] sm:text-[11px] font-semibold text-white/90 hover:text-white underline underline-offset-2"
+          >
+            {infoExpanded ? "See less" : "See more"}
+          </button>
+        )}
         <p className="text-[12px] sm:text-sm mt-1 text-gray-300">{address}</p>
 
         {route && (
